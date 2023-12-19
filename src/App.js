@@ -1,5 +1,7 @@
 import "./App.css";
 
+// TODO : Ici mettre les routes de notre projet
+
 function App() {
   return (
     <div className="App">
