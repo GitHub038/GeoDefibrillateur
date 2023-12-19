@@ -1,14 +1,13 @@
 import "./App.css";
+import Home from "./pages/Home/Home";
 
 // TODO : Ici mettre les routes de notre projet
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Futur site de notre projet</p>
-      </header>
-    </div>
+    <>
+    <Home />
+    </>
   );
 }
 
