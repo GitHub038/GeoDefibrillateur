@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useLocalStorageState from './useLocalStorage'
 
 const URL = import.meta.env.VITE_API_URL
@@ -22,17 +22,13 @@ const useFetchDAE = () => {
         setData(data)
         setError('')
       } catch (err) {
-        // Pour ignorer l'erreur AbortError qui n'en n'est pas une
-        if (err.name === 'AbortError') {
-          // console.error(err.message)
-          setError(err.message)
-        }
+        setError(err.message)
       } finally {
         setIsLoading(false)
       }
     }
     fetchDAE()
-  }, [])
+  }, [setData])
 
   return {
     data,
