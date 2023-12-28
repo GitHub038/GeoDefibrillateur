@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+const URL = import.meta.env.VITE_API_URL
+
 const useFetchDAE = () => {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -10,9 +12,7 @@ const useFetchDAE = () => {
       try {
         setIsLoading(true)
         setError('')
-        const response = await fetch(
-          'https://us-central1-rest-api-dae.cloudfunctions.net/app/entries',
-        )
+        const response = await fetch(URL)
         if (!response.ok) {
           throw new Error('Something went wrong with fetching movies')
         }

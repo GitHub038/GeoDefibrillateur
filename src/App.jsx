@@ -6,6 +6,8 @@ import useFetchDAE from './hooks/useFetchDAE'
 function App() {
   const { data, isLoading, error } = useFetchDAE()
 
+  console.log(data)
+
   return (
     <div className="App">
       <header className="App-header">
