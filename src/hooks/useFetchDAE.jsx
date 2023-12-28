@@ -4,7 +4,6 @@ import useLocalStorageState from './useLocalStorage'
 
 const URL = import.meta.env.VITE_API_URL
 
-const URL = import.meta.env.VITE_API_URL
 
 const useFetchDAE = () => {
   // const [data, setData] = useState(null)
