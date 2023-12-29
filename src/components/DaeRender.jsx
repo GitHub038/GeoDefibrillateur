@@ -27,9 +27,9 @@ const DAEList = ({ data }) => {
       <div className="App-header">
         <p>Futur site de notre projet</p>
       </div>
-      <div className="mb-6 text-center text-3xl underline decoration-pink-500 ">
+      {/* <div className="mb-6 text-center text-3xl underline decoration-pink-500 ">
         Nombre de DAE : {data.length}
-      </div>
+      </div> */}
       <div className="grid grid-cols-2">
         {data.map((entry) => (
           <div key={entry.gid} className="m-6">
@@ -49,6 +49,8 @@ const DAEList = ({ data }) => {
 }
 const DaeRender = () => {
   const { data, isLoading, error } = useFetchDAE()
+  console.log('test')
+  console.log(data)
   return (
     <>
       {isLoading && <Loader />}
