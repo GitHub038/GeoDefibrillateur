@@ -23,15 +23,16 @@ const ErrorMessage = ({ message }) => {
 //Mini component to display DAE_List
 const DAEList = ({ data }) => {
   return (
-    <div>
-      <div className="App-header">
-        <p>Futur site de notre projet</p>
-      </div>
+    <>
+      <p className="bg-secondary text-4xl items-center w-full">
+        Futur site de notre projet
+      </p>
+
       {/* <div className="mb-6 text-center text-3xl underline decoration-pink-500 ">
         Nombre de DAE : {data.length}
       </div> */}
       <div className="grid grid-cols-2">
-        {data.map((entry) => (
+        {data?.map((entry) => (
           <div key={entry.gid} className="m-6">
             <h3 className="text-2xl "> Name: {entry.c_nom}</h3>
             <p>
@@ -44,7 +45,7 @@ const DAEList = ({ data }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 const DaeRender = () => {
