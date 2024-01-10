@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { getAuth, signOut } from 'firebase/auth'
 
-const Home = () => {
+const Profil = () => {
   const auth = getAuth()
   const handleSignOut = async () => {
     try {
@@ -10,13 +10,12 @@ const Home = () => {
       console.log(error)
     }
   }
-
   return (
     <div>
-      <h1>This is the home page</h1>
       <Button onClick={() => handleSignOut()}>Log out</Button>
+      <h1>Profil</h1>
     </div>
   )
 }
 
-export default Home
+export default Profil
