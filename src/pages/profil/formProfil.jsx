@@ -4,6 +4,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { getAuth, updateProfile } from '@firebase/auth'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 //Initialize
 const auth = getAuth()
@@ -61,12 +62,16 @@ const FormProfil = () => {
   }, [currentUser])
 
   return (
-    <div className="fields">
+    <div className="flex flex-col gap-2 w-5/6 justify-center">
       <Input type="file" onChange={handleChange} />
+      <Avatar className="w-60 h-60 justify-center self-center">
+        <AvatarImage src={photoURL} alt="Your profile picture" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+
       <Button disabled={loading || !photo} onClick={handleClick}>
         Upload
       </Button>
-      <img src={photoURL} alt="Avatar" className="avatar" />
     </div>
   )
 }
