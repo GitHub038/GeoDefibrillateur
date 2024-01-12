@@ -18,7 +18,7 @@ const Profil = () => {
   return (
     <div>
       <Button onClick={() => handleSignOut()}>Log out</Button>
-      <div className="flex flex-col w-screen justify-center items-center">
+      <div className="flex flex-col w-screen justify-center items-center gap-6">
         <h1 className="text-3xl text-center">Edit Your Profile</h1>
         <FormProfil />
       </div>

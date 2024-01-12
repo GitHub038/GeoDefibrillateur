@@ -5,6 +5,7 @@ import { getAuth, updateProfile } from '@firebase/auth'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Label } from '@/components/ui/label'
 
 //Initialize
 const auth = getAuth()
@@ -34,25 +35,54 @@ export async function upload(file, currentUser, setLoading) {
   updateProfile(currentUser, { photoURL })
 
   setLoading(false)
-  alert('Uploaded file!')
+  alert('Uploaded Avatar_file!')
 }
 
 const FormProfil = () => {
   const currentUser = useAuth()
+  const user = auth.currentUser
+
+  const email = user.email
+
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [photo, setPhoto] = useState(null)
+
   const [loading, setLoading] = useState(false)
   const [photoURL, setPhotoURL] = useState(
     'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
   )
 
+  useEffect(() => {
+    if (!user.displayName) {
+      setFirstName('')
+      setLastName('')
+    } else {
+      setFirstName(user.displayName.split(' ')[0])
+      setLastName(user.displayName.split(' ')[1])
+    }
+  }, [user])
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    if (firstName && lastName) {
+      upload(photo, currentUser, setLoading)
+
+      updateProfile(user, {
+        displayName: `${firstName} ${lastName}`,
+      })
+        .then(() => {
+          alert('Profile updated!')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
   function handleChange(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0])
     }
-  }
-
-  function handleClick() {
-    upload(photo, currentUser, setLoading)
   }
 
   useEffect(() => {
@@ -62,17 +92,47 @@ const FormProfil = () => {
   }, [currentUser])
 
   return (
-    <div className="flex flex-col gap-2 w-5/6 justify-center">
-      <Input type="file" onChange={handleChange} />
-      <Avatar className="w-60 h-60 justify-center self-center">
-        <AvatarImage src={photoURL} alt="Your profile picture" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+    <form
+      disabled={loading || !photo || !firstName || !lastName}
+      onSubmit={onSubmit}
+      className="flex flex-col gap-2 justify-evenly w-5/6"
+    >
+      <div className="flex flex-col gap-2 md:flex-row justify-center border border-gray-300">
+        <div className="flex flex-col gap-2 w-5/6 justify-evenly">
+          <div>
+            <Label>Prénom</Label>
+            <Input
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Prénom"
+            />
+          </div>
+          <div>
+            <Label>Nom</Label>
+            <Input
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Nom"
+            />
+          </div>
+          <div>
+            <Label Label htmlFor="email" className="self-center">
+              You email
+            </Label>
+            <Input type="email" value={email} placeholder="Email" disabled />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Avatar className="w-32 h-32 justify-center self-center">
+            <AvatarImage src={photoURL} alt="Your profile picture" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <Input type="file" onChange={handleChange} />
+        </div>
+      </div>
 
-      <Button disabled={loading || !photo} onClick={handleClick}>
-        Upload
-      </Button>
-    </div>
+      <Button type="submit">Submit</Button>
+    </form>
   )
 }
 
