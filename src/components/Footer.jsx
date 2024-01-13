@@ -26,7 +26,7 @@ function Footer() {
             </li>
             <li>
               <a href="/info" className="hover:underline me-4 md:me-6">
-                Info & FAQ
+                Guide d'utilisation
               </a>
             </li>
             <li>
