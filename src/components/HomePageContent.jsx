@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 
 function HomePageContent() {
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white rounded-lg shadow-inner dark:bg-gray-900 m-4">
       <div className="gap-6 items-center py-4 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-4">
         <div className="hidden lg:block mt-0">
           <img
@@ -22,7 +22,7 @@ function HomePageContent() {
         </div>
         <div className="pt-5 font-light text-gray-500 sm:text-lg dark:text-gray-400 z-0">
           <h2 className="text-center lg:text-justify mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl">
-            Agir pour lutter contre la mort subite !
+            Agir pour lutter contre la mort subite&nbsp;!
           </h2>
           <p className="mb-4 text-center lg:text-justify">
             À peine 1 citoyen sur 10 survit à un arrêt cardiaque faute d’avoir

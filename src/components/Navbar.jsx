@@ -2,6 +2,7 @@ import React from 'react'
 import { CircleUserRound } from 'lucide-react'
 import { NavbarMenu } from './NavbarMenu.jsx'
 import { classNames } from '../utils/helpers.js'
+import { ToggleTheme } from './ToggleTheme.jsx'
 
 const navigation = [
   { name: 'Rechercher un DAE', href: '/searchDAE', current: false },
@@ -63,7 +64,7 @@ function Navbar() {
                   GeoDéfibrillateurs
                 </div>
               </div>
-              <div className="hidden sm:ml-6 sm:block">
+              <div className="hidden sm:ml-4 sm:flex">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
                     <a
@@ -71,8 +72,8 @@ function Navbar() {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-primary text-white'
-                          : 'text-white text-shadow-lg shadow-gray-900 font-extrabold hover:bg-secondary hover:text-black hover:shadow-gray-100',
+                          ? 'bg-primary text-white dark:bg-[#d8e4dd] dark:text-black'
+                          : 'text-white text-shadow-lg shadow-gray-900 font-extrabold hover:bg-secondary hover:text-black hover:shadow-gray-100 dark:hover:bg-[#d8e4dd]',
                         'rounded-md px-3 py-2 text-sm font-medium',
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -80,6 +81,9 @@ function Navbar() {
                       {item.name}
                     </a>
                   ))}
+                </div>
+                <div className="hidden sm:ml-4 sm:block">
+                  <ToggleTheme />
                 </div>
               </div>
             </div>
