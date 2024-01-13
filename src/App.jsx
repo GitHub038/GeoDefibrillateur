@@ -1,18 +1,16 @@
 import SignIn from './Routes/SignIn'
 import SignUp from './Routes/SignUp'
-
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import AuthContext from './Context/AuthContext'
-import { ThemeProvider } from './Context/ThemeContext'
 import Protected from './Routes/Protected'
 import Authentification from './pages/authentification'
 import DaeRender from './components/DaeRender'
 import HomePage from './pages/homePage'
-import InfoDAE from './pages/infoDAE'
+import HowToUse from './pages/HowToUse'
 import Profil from './pages/profil'
-
-// TODO : Ici mettre les routes de notre projet
+import { Navbar } from './components/Navbar.jsx'
+import { Footer } from './components/Footer.jsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -26,7 +24,7 @@ function App() {
     },
     {
       path: '/info',
-      element: <InfoDAE />,
+      element: <HowToUse />,
     },
 
     {
@@ -51,11 +49,11 @@ function App() {
     },
   ])
   return (
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <AuthContext>
-        <RouterProvider router={router} />
-      </AuthContext>
-    </ThemeProvider>
+    <AuthContext>
+      <Navbar />
+      <RouterProvider router={router} />
+      <Footer />
+    </AuthContext>
   )
 }
 

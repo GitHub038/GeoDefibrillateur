@@ -6,7 +6,7 @@ import { ToggleTheme } from './ToggleTheme.jsx'
 
 const navigation = [
   { name: 'Rechercher un DAE', href: '/searchDAE', current: false },
-  { name: 'Info & FAQ', href: '/info', current: false },
+  { name: "Guide d'utilisation", href: '/info', current: false },
   {
     name: (
       <>
