@@ -4,6 +4,7 @@ import SignUp from './Routes/SignUp'
 import { createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import AuthContext from './Context/AuthContext'
+import { ThemeProvider } from './Context/ThemeContext'
 import Protected from './Routes/Protected'
 import Authentification from './pages/authentification'
 import DaeRender from './components/DaeRender'
@@ -50,9 +51,11 @@ function App() {
     },
   ])
   return (
-    <AuthContext>
-      <RouterProvider router={router} />
-    </AuthContext>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <AuthContext>
+        <RouterProvider router={router} />
+      </AuthContext>
+    </ThemeProvider>
   )
 }
 
