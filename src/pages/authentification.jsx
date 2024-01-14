@@ -17,37 +17,23 @@ const Authentification = () => {
 
   return (
     <>
-      {/* <div className='bg-[url('public/heart-attack.jpg')]'></div> */}
-      <div className="md:hidden m-6 border-2 rounded-lg  border-slate-200">
+      <div className="md:hidden m-6 border-2 rounded-lg border-slate-200">
         <img
-          // src="/examples/authentication-light.png"
-          src="../public/heart-attack.jpg"
+          src="/heart-attack.jpg"
           width={1280}
           height={843}
           alt="Authentication"
           className="block dark:hidden"
         />
         <img
-          // src="/examples/authentication-dark.png"
-          src="../public/heart-attack.jpg"
+          src="/heart-attack.jpg"
           width={1280}
           height={843}
           alt="Authentication"
           className="hidden dark:block"
         />
       </div>
-      <div className="container relative  h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <Button
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            // 'absolute right-4 top-4 md:right-8 md:top-8'
-            'absolute flex items-center w-auto gap-2 md:right-8 md:top-8',
-          )}
-          onClick={onChangeSign}
-        >
-          {signType === 'signUp' ? 'Sign In' : 'Sign Up'}
-        </Button>
-
+      <div className="container relative mt-16 h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <AuthentSidebar />
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -69,6 +55,16 @@ const Authentification = () => {
               </a>
               .
             </p>
+            <Button
+              className={cn(
+                buttonVariants({ variant: 'ghost' }),
+
+                'flex items-center w-auto gap-2 ',
+              )}
+              onClick={onChangeSign}
+            >
+              {signType === 'signUp' ? 'Ou se connecter' : "Ou s'inscrire"}
+            </Button>
           </div>
         </div>
       </div>
