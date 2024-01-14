@@ -11,6 +11,7 @@ import HowToUse from './pages/HowToUse'
 import Profil from './pages/profil'
 import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
+import { ThemeProvider } from './Context/ThemeContext.jsx'
 
 function App() {
   const router = createBrowserRouter([
@@ -49,11 +50,13 @@ function App() {
     },
   ])
   return (
-    <AuthContext>
-      <Navbar />
-      <RouterProvider router={router} />
-      <Footer />
-    </AuthContext>
+    <ThemeProvider>
+      <AuthContext>
+        <Navbar />
+        <RouterProvider router={router} />
+        <Footer />
+      </AuthContext>
+    </ThemeProvider>
   )
 }
 
