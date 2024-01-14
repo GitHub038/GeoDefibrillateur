@@ -64,7 +64,7 @@ const FormProfil = () => {
   }, [user])
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     if (firstName && lastName) {
       upload(photo, currentUser, setLoading)
 
