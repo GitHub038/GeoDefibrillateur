@@ -4,10 +4,18 @@ import { NavbarMenu } from './NavbarMenu.jsx'
 import { classNames } from '../utils/helpers.js'
 import { ToggleTheme } from './ToggleTheme.jsx'
 import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
-import { getAuth } from 'firebase/auth'
+import { getAuth, signOut } from 'firebase/auth'
 
 const auth = getAuth()
 const user = auth.currentUser
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth)
+  } catch (error) {
+    console.log(error)
+  }
+}
 const LoginToggle = () => {
   if (!user)
     return (
@@ -17,7 +25,11 @@ const LoginToggle = () => {
       </>
     )
   else {
-    return <div className="sm:hidden">{MENU_4}</div>
+    return (
+      <div className="sm:hidden" onClick={handleSignOut}>
+        {MENU_4}
+      </div>
+    )
   }
 }
 
