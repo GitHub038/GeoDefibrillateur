@@ -1,3 +1,4 @@
+import { MENU_1, MENU_2, MENU_3 } from '@/utils/constants.js'
 import React from 'react'
 
 function Footer() {
@@ -21,17 +22,17 @@ function Footer() {
           <ul className="flex flex-wrap flex-col sm:flex-row items-center mb-6 sm:mb-0 text-sm font-medium text-gray-500  dark:text-gray-400">
             <li>
               <a href="/searchDAE" className="hover:underline me-6 md:me-6">
-                Rechercher un DAE
+                {MENU_1}
               </a>
             </li>
             <li>
               <a href="/info" className="hover:underline me-4 md:me-6">
-                Guide d'utilisation
+                {MENU_2}
               </a>
             </li>
             <li>
               <a href="/auth" className="hover:underline me-4 md:me-6">
-                Se connecter
+                {MENU_3}
               </a>
             </li>
           </ul>
