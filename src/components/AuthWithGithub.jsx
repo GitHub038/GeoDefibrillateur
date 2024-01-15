@@ -25,9 +25,9 @@ export const AuthWithGithub = () => {
         console.log(user)
       })
     } catch (error) {
-      const errorCode = error.code
+      const errorMessage = error.message
 
-      console.log(errorCode)
+      console.log(errorMessage)
     }
 
     setIsLoading(false)
@@ -43,6 +43,7 @@ export const AuthWithGithub = () => {
           type="button"
           disabled={isLoading}
           onClick={handleGithubLogin}
+          className="w-full"
         >
           {isLoading ? (
             <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />

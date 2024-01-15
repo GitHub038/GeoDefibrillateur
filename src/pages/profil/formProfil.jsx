@@ -92,47 +92,52 @@ const FormProfil = () => {
   }, [currentUser])
 
   return (
-    <form
-      disabled={loading || !photo || !firstName || !lastName}
-      onSubmit={onSubmit}
-      className="flex flex-col gap-2 justify-evenly w-5/6"
-    >
-      <div className="flex flex-col gap-2 md:flex-row justify-center border border-gray-300">
-        <div className="flex flex-col gap-2 w-5/6 justify-evenly">
-          <div>
-            <Label>Prénom</Label>
-            <Input
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Prénom"
-            />
+    <div className="flex flex-col w-screen justify-center items-center gap-6">
+      <h1 className="text-3xl mt-10 text-center">
+        {`Modifier votre profil ${firstName}`}{' '}
+      </h1>
+      <form
+        disabled={loading || !photo || !firstName || !lastName}
+        onSubmit={onSubmit}
+        className="flex flex-col gap-2 justify-evenly w-5/6"
+      >
+        <div className="flex flex-col gap-2 md:flex-row justify-center border border-gray-300">
+          <div className="flex flex-col gap-2 w-5/6 justify-evenly">
+            <div>
+              <Label>Prénom</Label>
+              <Input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Prénom"
+              />
+            </div>
+            <div>
+              <Label>Nom</Label>
+              <Input
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Nom"
+              />
+            </div>
+            <div>
+              <Label Label htmlFor="email" className="self-center">
+                You email
+              </Label>
+              <Input type="email" value={email} placeholder="Email" disabled />
+            </div>
           </div>
-          <div>
-            <Label>Nom</Label>
-            <Input
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Nom"
-            />
-          </div>
-          <div>
-            <Label Label htmlFor="email" className="self-center">
-              You email
-            </Label>
-            <Input type="email" value={email} placeholder="Email" disabled />
+          <div className="flex flex-col gap-2">
+            <Avatar className="w-32 h-32 justify-center self-center">
+              <AvatarImage src={photoURL} alt="Your profile picture" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <Input type="file" onChange={handleChange} />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <Avatar className="w-32 h-32 justify-center self-center">
-            <AvatarImage src={photoURL} alt="Your profile picture" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <Input type="file" onChange={handleChange} />
-        </div>
-      </div>
 
-      <Button type="submit">Submit</Button>
-    </form>
+        <Button type="submit">Submit</Button>
+      </form>
+    </div>
   )
 }
 

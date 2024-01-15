@@ -57,7 +57,7 @@ const Authentification = () => {
             </p>
             <Button
               className={cn(
-                buttonVariants({ variant: 'ghost' }),
+                buttonVariants({ variant: 'outline-offset-2' }),
 
                 'flex items-center w-auto gap-2 ',
               )}
