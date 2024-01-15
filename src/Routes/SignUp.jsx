@@ -18,18 +18,14 @@ const SignUp = ({ isLoading }) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        // Signed in
-        // Success...
+
         console.log(user)
 
         alert('Compte crée avec succes. Connectez-vous avec le Sign In !')
-        //...
-        // ...
+
       })
       .catch((error) => {
-        //   const errorCode = error.code
-        //   const errorMessage = error.message
-        // Error
+
         console.log(error)
       })
   }

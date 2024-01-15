@@ -16,7 +16,6 @@ function HomePageHeader() {
             Localisez-moi
           </Button>
         </div>
-        {/* <div className="hidden lg:block bg-[linear-gradient(180deg,transparent,_#2525259c,_#fff)] lg:h-[19rem] lg:mt-[22rem]"></div> */}
       </header>
     </>
   )

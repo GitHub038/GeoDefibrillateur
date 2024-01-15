@@ -1,29 +1,16 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-
 import SignIn from '@/Routes/SignIn'
 import SignUp from '@/Routes/SignUp'
-import { Icons } from './ui/icons'
+
+import { AuthWithGithub } from './AuthWithGithub'
 
 const AuthFormUser = ({ onChangeSign, signType }) => {
-  const [isLoading, setIsLoading] = useState(false)
-
-  async function onSubmit(e) {
-    e.preventDefault()
-    setIsLoading(true)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
-  }
-
   return (
     <div className="flex flex-col gap-2">
-      <form type="submit" onSubmit={onSubmit}>
+      <form type="submit">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
             {signType === 'signUp'
-              ? 'Creer un compte'
+              ? 'Créer un compte'
               : signType === 'signIn' && 'Se connecter'}
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -48,14 +35,7 @@ const AuthFormUser = ({ onChangeSign, signType }) => {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
-          <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.GitHub className="mr-2 h-4 w-4" />
-        )}{' '}
-        Github
-      </Button>
+      <AuthWithGithub />
     </div>
   )
 }

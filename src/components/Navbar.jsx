@@ -3,18 +3,47 @@ import { CircleUserRound } from 'lucide-react'
 import { NavbarMenu } from './NavbarMenu.jsx'
 import { classNames } from '../utils/helpers.js'
 import { ToggleTheme } from './ToggleTheme.jsx'
-import { MENU_1, MENU_2, MENU_3 } from '@/utils/constants.js'
+import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+import { getAuth, signOut } from 'firebase/auth'
 
-const navigation = [
-  { name: MENU_1, href: '/searchDAE', current: false },
-  { name: MENU_2, href: '/info', current: false },
-  {
-    name: (
+const auth = getAuth()
+const user = auth.currentUser
+
+const handleSignOut = async () => {
+  try {
+    await signOut(auth)
+  } catch (error) {
+    console.log(error)
+  }
+}
+const LoginToggle = () => {
+  if (!user)
+    return (
       <>
         <div className="sm:hidden">{MENU_3}</div>
         <CircleUserRound className="hidden sm:inline-block h-5 w-auto" />
       </>
+    )
+  else {
+    return (
+      <div className="sm:hidden" onClick={handleSignOut}>
+        {MENU_4}
+      </div>
+    )
+  }
+}
+
+const navigation = [
+  { name: MENU_1, href: '/searchDAE', current: false },
+  { name: MENU_2, href: '/info', current: false },
+
+  {
+    name: (
+      <>
+        <LoginToggle />
+      </>
     ),
+
     href: '/auth',
     current: false,
   },
