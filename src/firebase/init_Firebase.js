@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-// import { getDatabase } from 'firebase/database'
+
 
 const apiKey = import.meta.env.VITE_REACT_PUBLIC_FIREBASE_API_KEY
 const projectId = import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID
@@ -21,6 +21,3 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig)
-// const db = getDatabase(app)
-
-// export { db }
