@@ -7,7 +7,6 @@ import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
 import { getAuth, signOut } from 'firebase/auth'
 
 const auth = getAuth()
-const user = auth.currentUser
 
 const handleSignOut = async () => {
   try {
@@ -17,6 +16,8 @@ const handleSignOut = async () => {
   }
 }
 const LoginToggle = () => {
+  const user = auth?.currentUser?.displayName
+
   if (!user)
     return (
       <>
@@ -26,9 +27,15 @@ const LoginToggle = () => {
     )
   else {
     return (
-      <div className="sm:hidden" onClick={handleSignOut}>
-        {MENU_4}
-      </div>
+      <>
+        <div className="sm:hidden" onClick={handleSignOut}>
+          {MENU_4}
+        </div>
+        <CircleUserRound
+          className="hidden sm:inline-block h-5 w-auto"
+          onClick={handleSignOut}
+        />
+      </>
     )
   }
 }

@@ -6,9 +6,12 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/ui/icons'
 import { app } from '@/firebase/init_Firebase'
-
+import { Toaster } from '@/components/ui/toaster'
+import { useToast } from '@/components/ui/use-toast'
 
 const SignIn = ({ isLoading }) => {
+  const { toast } = useToast()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -19,15 +22,15 @@ const SignIn = ({ isLoading }) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        // Success...
         console.log(user)
         navigate('/profil')
-        //...
       })
       .catch((error) => {
-        // Error
-        alert('Vérifier votre email et mot de passe ou Inscrivez-vous !')
-        console.log(error)
+        toast({
+          title: '🤷🏾 Attention!',
+          description:
+            'Vérifier votre email et mot de passe ou Inscrivez-vous !',
+        })
       })
   }
   return (
@@ -74,6 +77,7 @@ const SignIn = ({ isLoading }) => {
           </Button>
         </div>
       </form>
+      <Toaster />
     </div>
   )
 }

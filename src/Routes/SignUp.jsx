@@ -8,8 +8,12 @@ import { Label } from '@/components/ui/label'
 import { Icons } from '@/components/ui/icons'
 import { app } from '@/firebase/init_Firebase'
 
+import { Toaster } from '@/components/ui/toaster'
+import { useToast } from '@/components/ui/use-toast'
 
 const SignUp = ({ isLoading }) => {
+  const { toast } = useToast()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,15 +22,18 @@ const SignUp = ({ isLoading }) => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-
-        console.log(user)
-
-        alert('Compte crée avec succes. Connectez-vous avec le Sign In !')
-
+        toast({
+          title: '🎉 Bravo',
+          description:
+            'Compte crée avec succés. Connectez-vous avec le Sign In !',
+        })
       })
       .catch((error) => {
-
-        console.log(error)
+        toast({
+          title: '🤷🏾 Attention!',
+          description:
+            error.message || 'Une erreur est survenue. Veuillez reessayer',
+        })
       })
   }
 
@@ -74,6 +81,7 @@ const SignUp = ({ isLoading }) => {
           </Button>
         </div>
       </form>
+      <Toaster />
     </div>
   )
 }
