@@ -21,7 +21,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        header: "url('/Background-DAE.png')",
+        header: "url('/Background-DAE.svg')",
       },
       colors: {
         border: 'hsl(var(--border))',
