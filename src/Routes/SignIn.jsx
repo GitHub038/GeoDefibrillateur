@@ -67,7 +67,7 @@ const SignIn = () => {
               type="password"
               placeholder="Password"
               autoCapitalize="none"
-              autoComplete="password"
+              autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
               onChange={(e) => setPassword(e.target.value)}
