@@ -8,7 +8,7 @@ function HomePageContent() {
         <div className="hidden lg:block mt-0">
           <img
             className="w-3/5 opacity-80 lg:w-3/4"
-            src="/content-DAE.png"
+            src="/content-DAE.svg"
             alt="Illustration d'un DAE"
           />
           <div className="hidden lg:block ml-8 pt-4 lg:ml-[11rem] lg:pt-8">

@@ -66,7 +66,7 @@ function Navbar() {
     const onScroll = (e) => {
       if (e.target.documentElement.scrollTop >= 100) {
         setAppBarStyle({
-          background: '#111',
+          background: '#111111bf',
           transition: 'background .5s ease-out',
           boxShadow: 'none',
         })
