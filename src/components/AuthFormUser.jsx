@@ -6,25 +6,23 @@ import { AuthWithGithub } from './AuthWithGithub'
 const AuthFormUser = ({ onChangeSign, signType }) => {
   return (
     <div className="flex flex-col gap-2">
-      <form type="submit">
-        <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {signType === 'signUp'
-              ? 'Créer un compte'
-              : signType === 'signIn' && 'Se connecter'}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Entrer votre adresse mail et mot de passe
-          </p>
-        </div>
-        <div className="grid gap-2">
-          {signType === 'signUp' ? (
-            <SignUp />
-          ) : (
-            signType === 'signIn' && <SignIn />
-          )}
-        </div>
-      </form>
+      <div className="flex flex-col space-y-2 text-center">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {signType === 'signUp'
+            ? 'Créer un compte'
+            : signType === 'signIn' && 'Se connecter'}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Entrer votre adresse mail et mot de passe
+        </p>
+      </div>
+      <div className="grid gap-2">
+        {signType === 'signUp' ? (
+          <SignUp />
+        ) : (
+          signType === 'signIn' && <SignIn />
+        )}
+      </div>
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
