@@ -8,6 +8,7 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
+    './pages/bgHeaderPage.css',
   ],
   prefix: '',
   theme: {
@@ -87,6 +88,7 @@ module.exports = {
       DEFAULT: '2px 2px 4px var(--tw-shadow-color)',
       lg: '4px 4px 8px var(--tw-shadow-color)',
       xl: '4px 4px 16px var(--tw-shadow-color)',
+      none: 'none',
     },
   },
   plugins: [
