@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
+import { Toaster } from '@/components/ui/toaster'
+import { useToast } from '@/components/ui/use-toast'
 
 //Initialize
 const auth = getAuth()
@@ -35,10 +37,11 @@ export async function upload(file, currentUser, setLoading) {
   updateProfile(currentUser, { photoURL })
 
   setLoading(false)
-  alert('Uploaded Avatar_file!')
 }
 
 const FormProfil = () => {
+  const { toast } = useToast()
+
   const currentUser = useAuth()
   const user = auth.currentUser
 
@@ -58,26 +61,44 @@ const FormProfil = () => {
       setFirstName('')
       setLastName('')
     } else {
-      setFirstName(user.displayName.split(' ')[0])
-      setLastName(user.displayName.split(' ')[1])
+      const nameParts = user.displayName.split(' ')
+      setFirstName(nameParts.slice(0, -1).join(' '))
+      setLastName(nameParts.slice(-1)[0])
     }
   }, [user])
 
-  const onSubmit = (e) => {
-    // e.preventDefault()
-    if (firstName && lastName) {
-      upload(photo, currentUser, setLoading)
+  const onSubmitForm = (e) => {
+    e.preventDefault()
 
+    if (firstName || lastName) {
       updateProfile(user, {
         displayName: `${firstName} ${lastName}`,
       })
         .then(() => {
-          alert('Profile updated!')
+          toast({
+            title: '🎉 Bravo',
+            description: 'Votre profil est mise à jour',
+          })
         })
         .catch((error) => {
           console.log(error)
         })
     }
+  }
+  const onSubmitPhoto = async (e) => {
+    // console.log(e)
+    // e.preventDefault()
+    await upload(photo, currentUser, setLoading)
+    !photo &&
+      toast({
+        title: '🤷🏾 Photo !!!',
+        description: 'Veuillez charger une photo',
+      })
+    photo &&
+      toast({
+        title: '🎉 Bravo',
+        description: 'Votre photo de profil est mise à jour',
+      })
   }
   function handleChange(e) {
     if (e.target.files[0]) {
@@ -96,13 +117,13 @@ const FormProfil = () => {
       <h1 className="text-3xl mt-10 text-center">
         {`Modifier votre profil ${firstName}`}{' '}
       </h1>
-      <form
-        disabled={loading || !photo || !firstName || !lastName}
-        onSubmit={onSubmit}
-        className="flex flex-col gap-2 justify-evenly w-5/6"
-      >
-        <div className="flex flex-col gap-2 md:flex-row justify-center border border-gray-300">
-          <div className="flex flex-col gap-2 w-5/6 justify-evenly">
+      <div className="flex flex-col md:flex-row gap-2 items-center justify-evenly  w-full md:w-5/6">
+        <form
+          disabled={(loading && !firstName) || !lastName}
+          onSubmit={onSubmitForm}
+          className="flex flex-col gap-2 justify-evenly w-2/3"
+        >
+          <div className="flex flex-col gap-2 w-full">
             <div>
               <Label>Prénom</Label>
               <Input
@@ -126,17 +147,35 @@ const FormProfil = () => {
               <Input type="email" value={email} placeholder="Email" disabled />
             </div>
           </div>
-          <div className="flex flex-col gap-2">
+
+          <Button type="submit">Submit</Button>
+        </form>
+        <form
+          disabled={loading && !photoURL}
+          onSubmit={async (e) => await onSubmitPhoto(e)}
+          className="flex flex-col gap-2 w-full md:w-1/3"
+        >
+          <div className="flex flex-col  justify-center items-center w-full gap-2">
             <Avatar className="w-32 h-32 justify-center self-center">
               <AvatarImage src={photoURL} alt="Your profile picture" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>Photo</AvatarFallback>
             </Avatar>
-            <Input type="file" onChange={handleChange} />
+            <div className="flex flex-col gap-2 justify-center self-center">
+              <Input type="file" onChange={handleChange} />
+              <Button
+                disabled={loading && !photo}
+                variant="outline"
+                type="submit"
+                className="self-center"
+              >
+                Submit
+              </Button>
+            </div>
           </div>
-        </div>
+        </form>
+      </div>
 
-        <Button type="submit">Submit</Button>
-      </form>
+      <Toaster />
     </div>
   )
 }

@@ -4,31 +4,40 @@ import { useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { Icons } from '@/components/ui/icons'
+
 import { app } from '@/firebase/init_Firebase'
+import { Toaster } from '@/components/ui/toaster'
+import { useToast } from '@/components/ui/use-toast'
+import { Loader2 } from 'lucide-react'
 
+// const SignIn = ({ isLoading }) => {
+const SignIn = () => {
+  const { toast } = useToast()
 
-const SignIn = ({ isLoading }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const auth = getAuth(app)
   const navigate = useNavigate()
 
   const handleSignIn = async (e) => {
+    setIsLoading(true)
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        // Success...
         console.log(user)
         navigate('/profil')
-        //...
       })
       .catch((error) => {
-        // Error
-        alert('Vérifier votre email et mot de passe ou Inscrivez-vous !')
-        console.log(error)
+        toast({
+          title: '🤷🏾 Attention!',
+          description:
+            'Vérifier votre email et mot de passe ou Inscrivez-vous !',
+        })
       })
+      .finally(() => setIsLoading(false))
   }
   return (
     <div>
@@ -39,6 +48,7 @@ const SignIn = ({ isLoading }) => {
               Email
             </Label>
             <Input
+              id="email"
               name="email"
               type="email"
               placeholder="E-mail"
@@ -52,11 +62,12 @@ const SignIn = ({ isLoading }) => {
               Password
             </Label>
             <Input
+              id="password"
               name="pass"
               type="password"
               placeholder="Password"
               autoCapitalize="none"
-              autoComplete="password"
+              autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
               onChange={(e) => setPassword(e.target.value)}
@@ -67,13 +78,12 @@ const SignIn = ({ isLoading }) => {
             type="submit"
             onClick={(e) => handleSignIn(e)}
           >
-            {isLoading && (
-              <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Sign in
           </Button>
         </div>
       </form>
+      <Toaster />
     </div>
   )
 }
