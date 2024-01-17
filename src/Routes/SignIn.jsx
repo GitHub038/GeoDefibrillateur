@@ -48,6 +48,7 @@ const SignIn = () => {
               Email
             </Label>
             <Input
+              id="email"
               name="email"
               type="email"
               placeholder="E-mail"
@@ -61,6 +62,7 @@ const SignIn = () => {
               Password
             </Label>
             <Input
+              id="password"
               name="pass"
               type="password"
               placeholder="Password"
