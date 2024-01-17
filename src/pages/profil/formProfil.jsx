@@ -85,9 +85,10 @@ const FormProfil = () => {
         })
     }
   }
-  const onSubmitPhoto = (e) => {
+  const onSubmitPhoto = async (e) => {
+    // console.log(e)
     // e.preventDefault()
-    upload(photo, currentUser, setLoading)
+    await upload(photo, currentUser, setLoading)
     !photo &&
       toast({
         title: '🤷🏾 Photo !!!',
@@ -151,7 +152,7 @@ const FormProfil = () => {
         </form>
         <form
           disabled={loading && !photoURL}
-          onSubmit={onSubmitPhoto}
+          onSubmit={async (e) => await onSubmitPhoto(e)}
           className="flex flex-col gap-2 w-full md:w-1/3"
         >
           <div className="flex flex-col  justify-center items-center w-full gap-2">
