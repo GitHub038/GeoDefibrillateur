@@ -64,7 +64,6 @@ const FormProfil = () => {
   const userImage = user.photoURL
   const email = user.email
   const nameParts = user.displayName ? user.displayName.split(' ') : []
-  console.log(nameParts.length)
   const userFirstName = nameParts.slice(0, -1).join(' ')
   const userLastName = nameParts.slice(-1)[0]
   useEffect(() => {
@@ -144,7 +143,6 @@ const FormProfil = () => {
 
   const handleSubmit = async () => {
     const imageRef = ref(storage, 'avatar/' + user.uid + '.png')
-    console.log(imageRef)
     await uploadBytes(imageRef, image)
       .then(() => {
         getDownloadURL(imageRef)
