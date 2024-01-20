@@ -16,7 +16,7 @@ function Footer() {
               src="/GeoDefibrillateurs.svg"
               alt="Logo GeoDefibrillateurs"
             />
-            <span className="self-center	text-xl sm:text-2xl cursor-default drop-shadow px-1 font-extrabold italic text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
+            <span className="self-center cursor-pointer text-xl sm:text-2xl drop-shadow px-1 font-extrabold italic text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
               GeoDéfibrillateurs
             </span>
           </a>

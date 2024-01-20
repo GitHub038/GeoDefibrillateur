@@ -93,17 +93,17 @@ function Navbar() {
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex sm:flex-1 items-center justify-between sm:gap-1 sm:items-stretch">
               <div className="flex flex-shrink-0 items-center">
-                <a href="/">
+                <a href="/" className="flex flex-row">
                   <img
                     className="h-8 w-auto cursor-pointer"
                     src="/GeoDefibrillateurs.svg"
                     alt="Logo GeoDefibrillateurs"
                     href="/"
                   />
+                  <div className="cursor-pointer whitespace-nowrap drop-shadow px-1 font-extrabold italic text-lg text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
+                    GeoDéfibrillateurs
+                  </div>
                 </a>
-                <div className="cursor-default whitespace-nowrap drop-shadow px-1 font-extrabold italic text-lg text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
-                  GeoDéfibrillateurs
-                </div>
               </div>
               <div className="hidden sm:ml-4 sm:flex">
                 <div className="flex space-x-4">
