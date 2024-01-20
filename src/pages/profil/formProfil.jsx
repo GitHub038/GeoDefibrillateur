@@ -1,6 +1,6 @@
 // import { onAuthStateChanged } from 'firebase/auth'
 // import { useEffect, useState } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { getAuth, updateProfile } from '@firebase/auth'
@@ -63,9 +63,18 @@ const FormProfil = () => {
   const user = auth.currentUser
   const userImage = user.photoURL
   const email = user.email
-  const nameParts = user.displayName.split(' ')
+  const nameParts = user.displayName ? user.displayName.split(' ') : []
+  console.log(nameParts.length)
   const userFirstName = nameParts.slice(0, -1).join(' ')
   const userLastName = nameParts.slice(-1)[0]
+  useEffect(() => {
+    if (!nameParts.length) {
+      toast({
+        title: '👋 Première connexion ? ',
+        description: 'Remplissez votre profil',
+      })
+    }
+  }, [nameParts.length, toast])
   const [firstName, setFirstName] = useState(userFirstName)
   const [lastName, setLastName] = useState(userLastName)
   const [image, setImage] = useState(null)
@@ -90,14 +99,14 @@ const FormProfil = () => {
 
   const onSubmitForm = (e) => {
     e.preventDefault()
-    if (firstName || lastName) {
+    if (firstName && lastName) {
       updateProfile(user, {
         displayName: `${firstName} ${lastName}`,
       })
         .then(() => {
           toast({
-            title: '🎉 Bravo',
-            description: 'Votre profil est mise à jour',
+            title: '🎉 Informations personnelles enregistrés',
+            description: 'Votre profil a bien été mis à jour',
           })
         })
         .catch((error) => {
@@ -106,8 +115,8 @@ const FormProfil = () => {
     } else {
       toast({
         variant: 'destructive',
-        title: '⚠️ Champs vides',
-        description: 'Veuillez remplir les champs',
+        title: '⚠️ Champ(s) non rempli(s)',
+        description: 'Veuillez remplir tous les champs',
       })
     }
   }
@@ -135,6 +144,7 @@ const FormProfil = () => {
 
   const handleSubmit = async () => {
     const imageRef = ref(storage, 'avatar/' + user.uid + '.png')
+    console.log(imageRef)
     await uploadBytes(imageRef, image)
       .then(() => {
         getDownloadURL(imageRef)
@@ -155,8 +165,8 @@ const FormProfil = () => {
     })
       .then(() => {
         toast({
-          title: '🎉 Bravo',
-          description: 'Votre avatar a été mis à jour',
+          title: '🎉 Photo de profil enregistrée',
+          description: 'Votre profil a bien été mis à jour',
         })
       })
       .catch((error) => {
@@ -194,7 +204,7 @@ const FormProfil = () => {
         <Card className="w-[350px] md:w-[750px]">
           <CardHeader>
             <CardTitle className="md:text-2xl text-lg font-semibold	text-primary text-center">
-              Bienvenue {firstName} sur votre compte !
+              👋 Bienvenue {firstName} sur votre compte !
             </CardTitle>
             <CardDescription className="md:text-lg text-sm text-center font-semibold">
               Ajouter / Modifier vos données en 1 clic !
@@ -212,7 +222,7 @@ const FormProfil = () => {
           </CardHeader>
           <CardContent>
             <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col items-center sm:flex-row space-y-1.5">
+              <div className="flex flex-col items-center sm:flex-row space-y-1.5 gap-4">
                 <Avatar className="w-32 h-32 justify-start">
                   <AvatarImage src={url} alt="Your profile picture" />
                   <AvatarFallback>CN</AvatarFallback>
@@ -228,7 +238,7 @@ const FormProfil = () => {
           </CardContent>
           <CardFooter className="flex flex-col sm:flex-row gap-4 justify-between items-center">
             <Input type="file" onChange={handleImageChange} />
-            <Button disabled={disabled} type="submit" onClick={handleSubmit}>
+            <Button disabled={disabled} onClick={handleSubmit}>
               <Image className="mr-2 h-4 w-4" />
               Ajouter / modifier
             </Button>
@@ -238,14 +248,15 @@ const FormProfil = () => {
           <CardHeader>
             <CardTitle>Infos persos</CardTitle>
             <CardDescription>
-              Ajouter / modifier vos informations personnels en remplissant les
-              champs <span className="font-bold">Prénom</span> ou{' '}
+              Ajouter / modifier vos informations personnelles en remplissant
+              les champs <span className="font-bold">Prénom</span> ou{' '}
               <span className="font-bold">Nom</span>
             </CardDescription>
             <Separator className="my-4" />
           </CardHeader>
           <CardContent>
-            <form onSubmit={onSubmitForm}>
+            {/* <form onSubmit={onSubmitForm}> */}
+            <form>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="firstname">Prénom</Label>
@@ -275,7 +286,8 @@ const FormProfil = () => {
               disabled={
                 firstName === userFirstName && lastName === userLastName
               }
-              type="submit"
+              // type="submit"
+              onClick={onSubmitForm}
             >
               <CircleUserRound className="mr-2 h-4 w-4" />
               Enregistrer
@@ -292,30 +304,32 @@ const FormProfil = () => {
             <Separator className="my-4" />
           </CardHeader>
           <CardContent>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  placeholder="Email"
-                  autoComplete="email"
-                  disabled
-                />
-                <Label htmlFor="password">Mot de passe</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value="*************************"
-                  autoComplete="current-password"
-                  disabled
-                />
+            <form>
+              <div className="grid w-full items-center gap-4">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    placeholder="Email"
+                    autoComplete="email"
+                    disabled
+                  />
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value="*************************"
+                    autoComplete="current-password"
+                    disabled
+                  />
+                </div>
               </div>
-            </div>
+            </form>
           </CardContent>
           <CardFooter className="justify-center sm:justify-start">
-            <Button disabled type="submit">
+            <Button disabled>
               <KeyRound className="mr-2 h-4 w-4" />
               Changer le mot de passe
             </Button>
@@ -337,7 +351,7 @@ const FormProfil = () => {
                   <img src="/github-logo.png" alt="logo de google" />
                   <div>GitHub</div>
                 </div>
-                <Button disabled={disabled} type="submit">
+                <Button disabled={disabled}>
                   <Unplug className="mr-2 h-4 w-4" />
                   Connecter
                 </Button>
@@ -349,7 +363,7 @@ const FormProfil = () => {
                   <img src="/google-logo.png" alt="logo de google" />
                   <div>Google</div>
                 </div>
-                <Button disabled={disabled} type="submit">
+                <Button disabled={disabled}>
                   <Unplug className="mr-2 h-4 w-4" />
                   Connecter
                 </Button>
@@ -378,14 +392,14 @@ const FormProfil = () => {
             </div>
           </CardContent>
           <CardFooter className="justify-center sm:justify-start">
-            <Button disabled={disabled} type="submit">
+            <Button disabled={disabled}>
               <Trash2 className="mr-2 h-4 w-4" />
               Supprimer le compte
             </Button>
           </CardFooter>
         </Card>
-        <Toaster />
       </div>
+      <Toaster />
     </div>
   )
 }
