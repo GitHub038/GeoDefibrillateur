@@ -79,7 +79,7 @@ const SignIn = () => {
             onClick={(e) => handleSignIn(e)}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign in
+            Se connecter
           </Button>
         </div>
       </form>

@@ -3,7 +3,7 @@ import { CircleUserRound } from 'lucide-react'
 import { NavbarMenu } from './NavbarMenu.jsx'
 import { classNames } from '../utils/helpers.js'
 import { ToggleTheme } from './ToggleTheme.jsx'
-import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+import { MENU_1, MENU_2, MENU_3, MENU_4, MENU_5 } from '@/utils/constants.js'
 import { getAuth, signOut } from 'firebase/auth'
 
 const auth = getAuth()
@@ -43,6 +43,7 @@ const LoginToggle = () => {
 const navigation = [
   { name: MENU_1, href: '/searchDAE', current: false },
   { name: MENU_2, href: '/info', current: false },
+  { name: MENU_5, href: '/profil', current: false },
 
   {
     name: (

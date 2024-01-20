@@ -1,4 +1,5 @@
-import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+// import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+import { MENU_1 } from '@/utils/constants.js'
 import React from 'react'
 
 function Footer() {
