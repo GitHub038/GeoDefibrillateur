@@ -1,6 +1,6 @@
 import SignIn from './Routes/SignIn'
 import SignUp from './Routes/SignUp'
-import { createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { RouterProvider } from 'react-router-dom'
 import AuthContext from './Context/AuthContext'
 import Protected from './Routes/Protected'
@@ -12,6 +12,12 @@ import Profil from './pages/profil/profil'
 import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
 import { ThemeProvider } from './Context/ThemeContext.jsx'
+import AppDae from './pages/appDae'
+import CityList from './components/appDAE/CityList'
+import City from './components/appDAE/City'
+import RegionList from './components/appDAE/RegionList'
+import DaeList from './components/appDAE/DaeList'
+import ErrorPage404 from './pages/errorPage404'
 
 function App() {
   const router = createBrowserRouter([
@@ -47,6 +53,36 @@ function App() {
     {
       path: '/sign-in',
       element: <SignIn />,
+    },
+    {
+      path: '/app',
+      element: <AppDae />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="/app/cities" replace />,
+        },
+        {
+          path: 'cities',
+          element: <CityList />,
+        },
+        {
+          path: 'cities/:id',
+          element: <City />,
+        },
+        {
+          path: 'regions',
+          element: <RegionList />,
+        },
+        {
+          path: 'search',
+          element: <DaeList />,
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <ErrorPage404 />,
     },
   ])
   return (
