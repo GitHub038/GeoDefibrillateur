@@ -4,7 +4,7 @@ import React from 'react'
 
 const AppDae = () => {
   return (
-    <div>
+    <div className="h-screen mt-20 p-6 flex relative overscroll-none">
       <Sidebar />
       <Map />
     </div>

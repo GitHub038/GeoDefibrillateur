@@ -18,8 +18,39 @@ import City from './components/appDAE/City'
 import RegionList from './components/appDAE/RegionList'
 import DaeList from './components/appDAE/DaeList'
 import ErrorPage404 from './pages/errorPage404'
+import { useEffect, useState } from 'react'
+import useFetchDAE from './hooks/useFetchDAE'
 
 function App() {
+  const { data, isLoadingDAE, error } = useFetchDAE()
+
+  // console.log(data)
+  // console.log(typeof data)
+  // console.log(data[0])
+
+  // console.log(data)
+
+  const [cities, setCities] = useState(data.c_com_nom)
+  // console.log(cities)
+  // const [isLoading, setIsLoading] = useState(isLoadingDAE)
+
+  // useEffect(() => {
+  //   const fetchCities = async () => {
+  //     try {
+  //       setIsLoading(true)
+  //       // eslint-disable-next-line no-use-before-define
+  //       const response = await fetch(data)
+  //       const data = await response.json()
+  //       setCities(data)
+  //     } catch (error) {
+  //       alert('Something went wrong with fetching cities')
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   }
+  //   fetchCities()
+  // }, [])
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -85,6 +116,7 @@ function App() {
       element: <ErrorPage404 />,
     },
   ])
+
   return (
     <ThemeProvider>
       <AuthContext>
