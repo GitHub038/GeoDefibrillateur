@@ -14,7 +14,7 @@ const ErrorPage404 = () => {
             <p className="py-2 text-center text-lg md:py-4 md:text-xl">
               La page que vous recherchez n'existe pas.
             </p>
-            <Link to={'home'} className="flex">
+            <Link to={'/'} className="flex">
               <Button className="mx-auto" size={'lg'}>
                 Retour au Menu
               </Button>
