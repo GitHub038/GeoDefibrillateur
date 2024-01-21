@@ -13,43 +13,46 @@ import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
 import { ThemeProvider } from './Context/ThemeContext.jsx'
 import AppDae from './pages/appDae'
-import CityList from './components/appDAE/CityList'
-import City from './components/appDAE/City'
+
+
 import RegionList from './components/appDAE/RegionList'
 import DaeList from './components/appDAE/DaeList'
 import ErrorPage404 from './pages/errorPage404'
 import { useEffect, useState } from 'react'
 import useFetchDAE from './hooks/useFetchDAE'
+import Dae from './components/appDAE/Dae'
+import SearchDae from './components/appDAE/SearchDae'
+import FormDae from './components/appDAE/FormDae'
 
 function App() {
-  const { data, isLoadingDAE, error } = useFetchDAE()
-
-  // console.log(data)
-  // console.log(typeof data)
-  // console.log(data[0])
+  const { data, isLoadingDAE } = useFetchDAE()
 
   // console.log(data)
 
-  const [cities, setCities] = useState(data.c_com_nom)
-  // console.log(cities)
-  // const [isLoading, setIsLoading] = useState(isLoadingDAE)
+  // const datasliced = data?.slice(0, 2)
+
+  const [isLoading, setIsLoading] = useState(isLoadingDAE)
+
+  // const [daeList, setDaeList] = useState([])
+  // console.log(daeList)
 
   // useEffect(() => {
-  //   const fetchCities = async () => {
+  //   const fetchDaeList = async () => {
   //     try {
   //       setIsLoading(true)
-  //       // eslint-disable-next-line no-use-before-define
-  //       const response = await fetch(data)
-  //       const data = await response.json()
-  //       setCities(data)
+
+  //       // const response = await fetch(data[0])
+  //       // const dataDAE = await response.json()
+  //       // setDaeList(dataDAE)
+  //       setDaeList(data[0])
   //     } catch (error) {
-  //       alert('Something went wrong with fetching cities')
+  //       alert('Something went wrong with fetching dataDae')
   //     } finally {
   //       setIsLoading(false)
   //     }
   //   }
-  //   fetchCities()
-  // }, [])
+  //   fetchDaeList()
+  // }, [data])
 
   const router = createBrowserRouter([
     {
@@ -91,15 +94,16 @@ function App() {
       children: [
         {
           index: true,
-          element: <Navigate to="/app/cities" replace />,
+          element: <Navigate to="/app/daeList" replace />,
         },
         {
-          path: 'cities',
-          element: <CityList />,
+          path: 'daeList',
+          // element: <DaeList daeList={datasliced} isLoading={isLoading} />,
+          element: <DaeList daeList={data} isLoading={isLoading} />,
         },
         {
-          path: 'cities/:id',
-          element: <City />,
+          path: 'daeList/:gid',
+          element: <Dae />,
         },
         {
           path: 'regions',
@@ -107,7 +111,11 @@ function App() {
         },
         {
           path: 'search',
-          element: <DaeList />,
+          element: <SearchDae />,
+        },
+        {
+          path: 'formdae',
+          element: <FormDae />,
         },
       ],
     },
