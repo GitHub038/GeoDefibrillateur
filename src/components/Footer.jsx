@@ -1,4 +1,5 @@
-import { MENU_1, MENU_2, MENU_3 } from '@/utils/constants.js'
+// import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+import { MENU_1 } from '@/utils/constants.js'
 import React from 'react'
 
 function Footer() {
@@ -15,7 +16,7 @@ function Footer() {
               src="/GeoDefibrillateurs.svg"
               alt="Logo GeoDefibrillateurs"
             />
-            <span className="self-center	text-xl sm:text-2xl cursor-default drop-shadow px-1 font-extrabold italic text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
+            <span className="self-center cursor-pointer text-xl sm:text-2xl drop-shadow px-1 font-extrabold italic text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
               GeoDéfibrillateurs
             </span>
           </a>
@@ -25,16 +26,16 @@ function Footer() {
                 {MENU_1}
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="/info" className="hover:underline me-4 md:me-6">
                 {MENU_2}
               </a>
             </li>
             <li>
-              <a href="/auth" className="hover:underline me-4 md:me-6">
+              <a href="/info" className="hover:underline me-4 md:me-6">
                 {MENU_3}
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />

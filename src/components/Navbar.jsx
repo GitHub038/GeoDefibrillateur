@@ -3,7 +3,7 @@ import { CircleUserRound } from 'lucide-react'
 import { NavbarMenu } from './NavbarMenu.jsx'
 import { classNames } from '../utils/helpers.js'
 import { ToggleTheme } from './ToggleTheme.jsx'
-import { MENU_1, MENU_2, MENU_3, MENU_4 } from '@/utils/constants.js'
+import { MENU_1, MENU_2, MENU_3, MENU_4, MENU_5 } from '@/utils/constants.js'
 import { getAuth, signOut } from 'firebase/auth'
 
 const auth = getAuth()
@@ -43,6 +43,7 @@ const LoginToggle = () => {
 const navigation = [
   { name: MENU_1, href: '/searchDAE', current: false },
   { name: MENU_2, href: '/info', current: false },
+  { name: MENU_5, href: '/profil', current: false },
 
   {
     name: (
@@ -92,17 +93,17 @@ function Navbar() {
           <div className="relative flex h-16 items-center justify-between">
             <div className="flex sm:flex-1 items-center justify-between sm:gap-1 sm:items-stretch">
               <div className="flex flex-shrink-0 items-center">
-                <a href="/">
+                <a href="/" className="flex flex-row">
                   <img
                     className="h-8 w-auto cursor-pointer"
                     src="/GeoDefibrillateurs.svg"
                     alt="Logo GeoDefibrillateurs"
                     href="/"
                   />
+                  <div className="cursor-pointer whitespace-nowrap drop-shadow px-1 font-extrabold italic text-lg text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
+                    GeoDéfibrillateurs
+                  </div>
                 </a>
-                <div className="cursor-default whitespace-nowrap drop-shadow px-1 font-extrabold italic text-lg text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
-                  GeoDéfibrillateurs
-                </div>
               </div>
               <div className="hidden sm:ml-4 sm:flex">
                 <div className="flex space-x-4">

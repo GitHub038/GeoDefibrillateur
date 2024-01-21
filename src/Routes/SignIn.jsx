@@ -27,7 +27,6 @@ const SignIn = () => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        console.log(user)
         navigate('/profil')
       })
       .catch((error) => {
@@ -65,7 +64,7 @@ const SignIn = () => {
               id="password"
               name="pass"
               type="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               autoCapitalize="none"
               autoComplete="current-password"
               autoCorrect="off"
@@ -79,7 +78,7 @@ const SignIn = () => {
             onClick={(e) => handleSignIn(e)}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign in
+            Se connecter
           </Button>
         </div>
       </form>

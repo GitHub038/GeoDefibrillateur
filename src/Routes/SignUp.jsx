@@ -28,16 +28,15 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
         toast({
-          title: '🎉 Bravo',
-          description:
-            'Compte crée avec succés. Connectez-vous avec le Sign In !',
+          title: '🎉 Bravo, compte crée avec succès !',
+          description: 'Cliquez sur "Connectez-vous", et identifiez-vous!',
         })
       })
       .catch((error) => {
         toast({
           title: '🤷🏾 Attention!',
           description:
-            error.message || 'Une erreur est survenue. Veuillez reessayer',
+            error.message || 'Une erreur est survenue. Veuillez réessayer',
         })
       })
       .finally(() => setIsLoading(false))
@@ -83,7 +82,7 @@ const SignUp = () => {
             onClick={(e) => handleSignUp(e)}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign up
+            S'inscrire
           </Button>
         </div>
       </form>
