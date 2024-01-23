@@ -1,5 +1,8 @@
+import React, { useEffect, useState } from 'react'
+import { where } from 'firebase/firestore/lite'
 import { Loader2 } from 'lucide-react'
-import useFetchDAE from '../hooks/useFetchDAE'
+import { useFetchData } from '../hooks/hooks'
+import { getDocsCustom } from '../utils/firebaseApi'
 
 //Mini component to display loader
 const Loader = () => {
@@ -44,15 +47,55 @@ const DAEList = ({ data }) => {
   )
 }
 const DaeRender = () => {
-  const { data, isLoading, error } = useFetchDAE()
+  const { data, status, error, execute } = useFetchData()
 
-  return (
-    <>
-      {isLoading && <Loader />}
-      {!isLoading && !error && <DAEList data={data} />}
-      {error && <ErrorMessage message={error} />}
-    </>
-  )
+  const [dae, setDae] = useState()
+
+  useEffect(() => {
+    // Exemple de requetes
+
+    /** Tout les DAE **/
+    //execute(getDocsCustom('/entries'))
+
+    /** Tout les DAE d'une Ville **/
+    //execute(
+    //  getDocsCustom('/entries', where('c_com_nom', '==', 'Condé-en-Normandie')),
+    //)
+
+    /** Un DAE avec une longitude et une latitude **/
+    execute(
+      getDocsCustom(
+        '/entries',
+        where('c_lat_coor1', '==', 48.8509),
+        where('c_long_coor1', '==', -0.541597),
+      ),
+    )
+  }, [execute])
+
+  const DaeListResult = () => {
+    switch (status) {
+      case 'failure':
+        return <ErrorMessage message={error} />
+      case 'loading':
+        return <Loader />
+      case 'done':
+        return <DAEList data={dae} />
+      default:
+        return <>{status}</>
+    }
+  }
+
+  useEffect(() => {
+    setDae(
+      data && data.docs
+        ? data.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        : [],
+    )
+  }, [data])
+  return <>{DaeListResult()}</>
 }
 
 export default DaeRender
