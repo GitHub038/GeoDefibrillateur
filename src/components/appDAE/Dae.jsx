@@ -16,8 +16,8 @@ const Dae = () => {
       <h4>DAE ID : {gid}</h4>
       <p>
         lat: {lat}, lng: {lng}
-        {/* lat: {c_lat_coor1}, lng: {c_long_coor1} */}
       </p>
+      {/* <p>ID : {gid}</p> */}
     </div>
   )
 }

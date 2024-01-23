@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import MapContain from './MapContain'
 
 const Map = () => {
   const navigate = useNavigate()
@@ -13,20 +14,27 @@ const Map = () => {
 
   return (
     <div
-      className="flex-1 h-full bg-[#42484d] relative"
+      // className="flex-1 h-full bg-[#42484d] relative"
+      className="flex-1 h-full bg-[#42484d]"
       onClick={() => navigate('formdae')}
     >
-      <h3>Map</h3>
       <div>
-        lat: {lat}, lng: {lng}
-        {/* lat: {c_lat_coor1}, lng: {c_lat_coor1} */}
+        <h3>Map</h3>
+        <div>
+          lat: {lat}, lng: {lng}
+          {/* lat: {c_lat_coor1}, lng: {c_lat_coor1} */}
+        </div>
+        <button
+          className="button"
+          onClick={() => setSearchParams({ lat: 50, lng: 50 })}
+        >
+          Change position
+        </button>
       </div>
-      <button
-        className="button"
-        onClick={() => setSearchParams({ lat: 50, lng: 50 })}
-      >
-        Change position
-      </button>
+      <div className="h-full border-4">
+        <MapContain />
+        {/* <MapContain lat={lat} lng={lng} /> */}
+      </div>
     </div>
   )
 }

@@ -33,27 +33,6 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(isLoadingDAE)
 
-  // const [daeList, setDaeList] = useState([])
-  // console.log(daeList)
-
-  // useEffect(() => {
-  //   const fetchDaeList = async () => {
-  //     try {
-  //       setIsLoading(true)
-
-  //       // const response = await fetch(data[0])
-  //       // const dataDAE = await response.json()
-  //       // setDaeList(dataDAE)
-  //       setDaeList(data[0])
-  //     } catch (error) {
-  //       alert('Something went wrong with fetching dataDae')
-  //     } finally {
-  //       setIsLoading(false)
-  //     }
-  //   }
-  //   fetchDaeList()
-  // }, [data])
-
   const router = createBrowserRouter([
     {
       path: '/',
