@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getStorage } from 'firebase/storage'
+import { getFirestore } from 'firebase/firestore/lite'
 
 const apiKey = import.meta.env.VITE_REACT_PUBLIC_FIREBASE_API_KEY
 const projectId = import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID
@@ -22,3 +23,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig)
 export const storage = getStorage(app)
+export const db = getFirestore(app)
