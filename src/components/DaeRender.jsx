@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { where } from 'firebase/firestore/lite'
 import { Loader2 } from 'lucide-react'
-import { useFetchData } from '../hooks/hooks'
+import { useFetchData } from '../hooks/useFetchData'
 import { getDocsCustom } from '../utils/firebaseApi'
 
 //Mini component to display loader
