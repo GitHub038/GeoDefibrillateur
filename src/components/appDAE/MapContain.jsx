@@ -7,6 +7,8 @@ import {
   useMapEvents,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
+import { divIcon, point } from 'leaflet'
+import MarkerClusterGroup from 'react-leaflet-cluster'
 
 // Source https://react-leaflet.js.org/docs/example
 function LocationMarker() {
@@ -23,25 +25,36 @@ function LocationMarker() {
 
   return position === null ? null : (
     <Marker position={position}>
-      <Popup>You are here</Popup>
+      <Popup>Votre position actuelle</Popup>
     </Marker>
   )
 }
-const MapContain = ({ lat, lng }) => {
+
+const MapContain = ({ markers, icon }) => {
   return (
-    <MapContainer
-      center={{ lat: 48.8, lng: 2.3 }}
-      //   center={{ lat: { lat }, lng: { lng } }}
-      zoom={10}
-      //   scrollWheelZoom={false}
-      style={{ height: '100%' }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <LocationMarker />
-    </MapContainer>
+    <>
+      {' '}
+      <MapContainer
+        center={{ lat: 46.7111, lng: 1.7191 }}
+        zoom={6.5}
+        scrollWheelZoom={false}
+        style={{ height: '100%' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <LocationMarker />
+        <MarkerClusterGroup>
+          {markers.map((marker, index) => (
+            <Marker position={marker?.geocode} icon={icon}>
+              <Popup>{marker?.popUp}</Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+      <button onClick={() => LocationMarker()}>Geolocaliser</button>
+    </>
   )
 }
 
