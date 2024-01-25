@@ -23,6 +23,18 @@ const ErrorMessage = ({ message }) => {
   )
 }
 
+// const markers = [
+//   {
+//     geocode: { lat, lng },
+//     popUp: 'Hello, je suis le DAE test 1',
+//   },
+// ]
+
+// const customsIcon = new Icon({
+//   iconUrl: '/Logo.svg',
+//   iconSize: [38, 48],
+// })
+
 //Mini component to display DAE_List
 const DAEList = ({ data }) => {
   return (
@@ -43,6 +55,7 @@ const DAEList = ({ data }) => {
           </div>
         ))}
       </div>
+      {/* <MapContain markers={markers} icon={customsIcon} /> */}
     </>
   )
 }
