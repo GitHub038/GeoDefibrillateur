@@ -11,12 +11,13 @@ import { Menu } from 'lucide-react'
 import { classNames } from '../utils/helpers.js'
 import { useTheme } from '@/hooks/useTheme.jsx'
 import { Moon, Sun } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function NavbarMenu({ navigation }) {
   const { theme, setTheme } = useTheme()
   const oppositeTheme = theme === 'dark' ? 'light' : 'dark'
   return (
-    <div className="flex sm:hidden">
+    <div className="flex lg:hidden">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -42,9 +43,9 @@ function NavbarMenu({ navigation }) {
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {navigation.map((item) => (
-            <DropdownMenuItem key={item.name}>
-              <a
-                href={item.href}
+            <DropdownMenuItem key={item.id}>
+              <Link
+                to={item.href}
                 className={classNames(
                   item.current
                     ? 'rounded-l-none hover:cursor-pointer hover:border-l-2 hover:border-primary'
@@ -53,7 +54,7 @@ function NavbarMenu({ navigation }) {
                 aria-current={item.current ? 'page' : undefined}
               >
                 {item.name}
-              </a>
+              </Link>
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

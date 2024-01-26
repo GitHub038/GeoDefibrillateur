@@ -1,7 +1,3 @@
-import SignIn from './Routes/SignIn'
-import SignUp from './Routes/SignUp'
-import { createBrowserRouter } from 'react-router-dom'
-import { RouterProvider } from 'react-router-dom'
 import AuthContext from './Context/AuthContext'
 import Protected from './Routes/Protected'
 import Authentification from './pages/authentification'
@@ -12,49 +8,41 @@ import Profil from './pages/profil/profil'
 import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
 import { ThemeProvider } from './Context/ThemeContext.jsx'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ErrorPage404 from './pages/errorPage404.jsx'
+import AppDae from './pages/AppDae'
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <HomePage />,
-    },
-    {
-      path: '/searchDAE',
-      element: <DaeRender />,
-    },
-    {
-      path: '/info',
-      element: <HowToUse />,
-    },
-
-    {
-      path: '/auth',
-      element: <Authentification />,
-    },
-    {
-      path: '/profil',
-      element: (
-        <Protected>
-          <Profil />
-        </Protected>
-      ),
-    },
-    {
-      path: '/sign-up',
-      element: <SignUp />,
-    },
-    {
-      path: '/sign-in',
-      element: <SignIn />,
-    },
-  ])
   return (
     <ThemeProvider>
       <AuthContext>
-        <Navbar />
-        <RouterProvider router={router} />
-        <Footer />
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/listeDAE"
+              element={
+                <Protected>
+                  <DaeRender />
+                </Protected>
+              }
+            />
+            <Route path="/guide" element={<HowToUse />} />
+            <Route path="/auth" element={<Authentification />} />
+            <Route
+              path="/profil"
+              element={
+                <Protected>
+                  <Profil />
+                </Protected>
+              }
+            />
+            <Route path="*" element={<ErrorPage404 />} />
+            <Route path="/rechercheDAE" element={<AppDae />} />
+          </Routes>
+          <Footer />
+        </Router>
       </AuthContext>
     </ThemeProvider>
   )
