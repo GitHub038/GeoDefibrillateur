@@ -1,13 +1,22 @@
-import { collection, getDocs, query } from "firebase/firestore/lite"
+import { collection, getDocs, where, query } from 'firebase/firestore/lite'
 import { db } from '../firebase/init_Firebase'
 
-const getDocsCustom = async (endpoint, ...whereOptions) => {
-    const collectionRef = collection(db, endpoint);
-    
-    const q = whereOptions.reduce((accumulator, currentValue) => {
-        return query(accumulator, currentValue);
-    }, collectionRef);
+export const getDocsCustom = async (endpoint, ...whereOptions) => {
+  const collectionRef = collection(db, endpoint)
 
-    return await getDocs(q);
+  const q = whereOptions.reduce((accumulator, currentValue) => {
+    return query(accumulator, currentValue)
+  }, collectionRef)
+
+  return await getDocs(q)
 }
-export {getDocsCustom}
+// export { getDocsCustom }
+
+export const getAllData = async (endpoint) => {
+  const querySnapshot = await getDocs(collection(db, endpoint))
+  querySnapshot.forEach((doc) => {
+    return doc.id, ' => ', doc.data()
+  })
+
+  return querySnapshot
+}

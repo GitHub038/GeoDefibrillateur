@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { where } from 'firebase/firestore/lite'
 import { Loader2 } from 'lucide-react'
 import { useFetchData } from '../hooks/useFetchData'
-import { getDocsCustom } from '../utils/firebaseApi'
+import { getDocsCustom, getAllData } from '../utils/firebaseApi'
 
 //Mini component to display loader
 const Loader = () => {
@@ -59,10 +59,26 @@ const DAEList = ({ data }) => {
     </>
   )
 }
+
+const DAEPosition = ({ positions }) => {
+  return (
+    <>
+      <p className="bg-secondary text-4xl items-center w-full">Liste des DAE</p>
+      <div className="grid grid-cols-2">
+        {positions?.map((entry) => (
+          <div key={entry.gid} className="m-6">
+            <p>Lat : {entry[0].geocode}</p> <p>Long : {entry[0].geocode}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
 const DaeRender = () => {
   const { data, status, error, execute } = useFetchData()
 
   const [dae, setDae] = useState()
+  const [positions, setPositions] = useState([])
 
   useEffect(() => {
     // Exemple de requetes
@@ -76,13 +92,14 @@ const DaeRender = () => {
     //)
 
     /** Un DAE avec une longitude et une latitude **/
-    execute(
-      getDocsCustom(
-        '/entries',
-        where('c_lat_coor1', '==', 48.8509),
-        where('c_long_coor1', '==', -0.541597),
-      ),
-    )
+    // getDocsCustom(
+    //   '/entries',
+    //   where('c_lat_coor1', '==', 48.8509),
+    //   where('c_long_coor1', '==', -0.541597),
+    // ),
+
+    /** Tous les DAE **/
+    execute(getAllData('/entries'))
   }, [execute])
 
   const DaeListResult = () => {
@@ -92,7 +109,8 @@ const DaeRender = () => {
       case 'loading':
         return <Loader />
       case 'done':
-        return <DAEList data={dae} />
+        // return <DAEList data={dae} />
+        return <DAEPosition positions={positions} />
       default:
         return <>{status}</>
     }
@@ -108,6 +126,24 @@ const DaeRender = () => {
         : [],
     )
   }, [data])
+
+  //Extraire les coordonnées DAE c_lat_coor1 et c_long_coor1
+  useEffect(() => {
+    if (data && data.docs) {
+      setPositions(
+        data.docs.map((dae) => [
+          {
+            geocode: `${(dae.data().c_lat_coor1, dae.data().c_long_coor1)}`,
+            popUp: `Hello, je suis le DAE : ${dae.data().c_nom}`,
+          },
+        ]),
+        ...positions,
+      )
+    }
+  }, [data])
+
+  console.log(positions)
+
   return <>{DaeListResult()}</>
 }
 
