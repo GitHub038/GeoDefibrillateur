@@ -36,7 +36,7 @@ const DAEList = ({ data }) => {
         </h1>
         <div className="grid lg:grid-cols-2 gap-4">
           {data?.map((entry) => (
-            <Card className="w-[350px] md:w-[450px]">
+            <Card className="w-[350px] lg:w-[450px] xl:w-[550px] 2xl:w-[650px]">
               <CardHeader key={entry.gid}>
                 <CardTitle className="md:text-2xl text-lg font-semibold	text-primary text-center">
                   {entry.c_nom}
@@ -59,7 +59,7 @@ const DAEList = ({ data }) => {
                       </p>
                       {entry.c_disp_j.replace(/[{}"]/g, '') !==
                         'non renseigné' && (
-                        <p className="truncate max-w-[14rem]">
+                        <p className="truncate max-w-[14rem] xl:overflow-visible">
                           <span className="font-bold">Disponibilité :</span>{' '}
                           {entry.c_disp_j.replace(/[{}"]/g, '')}
                         </p>
