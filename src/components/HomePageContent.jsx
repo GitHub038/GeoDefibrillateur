@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
 
 function HomePageContent() {
   return (
@@ -15,8 +16,9 @@ function HomePageContent() {
             <Button
               className="animate-heartbeat hover:animate-none hover:bg-primary"
               variant="destructive"
+              asChild
             >
-              Localisez-moi
+              <Link to="/rechercheDAE">Localisez-moi</Link>
             </Button>
           </div>
         </div>

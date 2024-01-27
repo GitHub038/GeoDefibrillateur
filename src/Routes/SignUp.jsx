@@ -68,7 +68,7 @@ const SignUp = () => {
               id="password"
               name="pass"
               type="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               autoCapitalize="none"
               autoComplete="new-password"
               autoCorrect="off"

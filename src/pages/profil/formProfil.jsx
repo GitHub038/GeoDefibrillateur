@@ -1,7 +1,4 @@
-// import { onAuthStateChanged } from 'firebase/auth'
-// import { useEffect, useState } from 'react'
 import { useState, useEffect } from 'react'
-// import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { getAuth, updateProfile } from '@firebase/auth'
 import { storage } from '../../firebase/init_Firebase.js'
@@ -26,40 +23,9 @@ import { Image } from 'lucide-react'
 import { Unplug } from 'lucide-react'
 import { Trash2 } from 'lucide-react'
 
-//Initialize
 const auth = getAuth()
-// const storage = getStorage()
-
-// Custom Hook
-// export function useAuth() {
-//   const [currentUser, setCurrentUser] = useState()
-
-//   useEffect(() => {
-//     const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user))
-//     return unsub
-//   }, [])
-
-//   return currentUser
-// }
-
-// Storage
-// export async function upload(file, currentUser, setLoading) {
-//   const fileRef = ref(storage, currentUser.uid + '.png')
-
-//   setLoading(true)
-
-//   // const snapshot = await uploadBytes(fileRef, file)
-//   const photoURL = await getDownloadURL(fileRef)
-
-//   updateProfile(currentUser, { photoURL })
-
-//   setLoading(false)
-// }
-
 const FormProfil = () => {
   const { toast } = useToast()
-
-  // const currentUser = useAuth()
   const user = auth.currentUser
   const userImage = user.photoURL
   const email = user.email
@@ -79,23 +45,6 @@ const FormProfil = () => {
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState(userImage)
   const [disabled, setDisabled] = useState(true)
-
-  // const [loading, setLoading] = useState(false)
-  // const [photoURL, setPhotoURL] = useState(
-  //   'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
-  // )
-
-  // useEffect(() => {
-  //   if (!user.displayName) {
-  //     setFirstName('')
-  //     setLastName('')
-  //   } else {
-  //     const nameParts = user.displayName.split(' ')
-  //     setFirstName(nameParts.slice(0, -1).join(' '))
-  //     setLastName(nameParts.slice(-1)[0])
-  //   }
-  // }, [user])
-
   const onSubmitForm = (e) => {
     e.preventDefault()
     if (firstName && lastName) {
@@ -119,21 +68,7 @@ const FormProfil = () => {
       })
     }
   }
-  // const onSubmitPhoto = async (e) => {
-  //   // console.log(e)
-  //   // e.preventDefault()
-  //   await upload(photo, user, setLoading)
-  //   !photo &&
-  //     toast({
-  //       title: '🤷🏾 Photo !!!',
-  //       description: 'Veuillez charger une photo',
-  //     })
-  //   photo &&
-  //     toast({
-  //       title: '🎉 Bravo',
-  //       description: 'Votre photo de profil est mise à jour',
-  //     })
-  // }
+
   function handleImageChange(e) {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
@@ -171,32 +106,9 @@ const FormProfil = () => {
         console.log(error)
       })
     setDisabled(true)
-    // updateProfile(user, {
-    //   photoURL: `https://firebasestorage.googleapis.com/v0/b/${storage.bucket}/o/avatar%2F${user.uid}.png?alt=media`,
-    // })
-    //   .then(() => {
-    //     toast({
-    //       title: '🎉 Bravo',
-    //       description: 'Votre profil est mise à jour',
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
   }
 
-  // useEffect(() => {
-  //   if (user?.photoURL) {
-  //     setPhotoURL(user.photoURL)
-  //   }
-  // }, [user])
-
   return (
-    // <div className="flex flex-col w-screen justify-center items-center gap-6">
-    //   <h1 className="text-3xl mt-10 text-center">
-    //     {`Modifier votre profil ${firstName}`}{' '}
-    //   </h1>
-    //   <div className="flex flex-col md:flex-row gap-2 items-center justify-evenly  w-full md:w-5/6">
     <div className="bg-secondary h-full mt-[-40px]">
       <div className="h-full w-full mx-auto flex justify-center items-center flex-col pt-20 pb-0 sm:pt-32 sm:pb-32 gap-6 px-4 sm:px-8">
         <Card className="w-[350px] md:w-[750px]">
@@ -284,7 +196,6 @@ const FormProfil = () => {
               disabled={
                 firstName === userFirstName && lastName === userLastName
               }
-              // type="submit"
               onClick={onSubmitForm}
             >
               <CircleUserRound className="mr-2 h-4 w-4" />

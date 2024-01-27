@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import '../pages/bgHeaderPage.css'
+import { Link } from 'react-router-dom'
 
 function HomePageHeader() {
   return (
@@ -14,8 +15,9 @@ function HomePageHeader() {
             <Button
               className="text-2xl font-bold p-8 animate-heartbeat hover:animate-none hover:bg-primary"
               variant="destructive"
+              asChild
             >
-              Localisez-moi
+              <Link to="/rechercheDAE">Localisez-moi</Link>
             </Button>
           </div>
         </div>
