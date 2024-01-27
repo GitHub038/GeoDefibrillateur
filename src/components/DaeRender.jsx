@@ -60,6 +60,7 @@ const DAEList = ({ data }) => {
         {data?.map((entry) => (
           <Card
             key={entry.id}
+
             className="w-[350px] lg:w-[450px] xl:w-[550px] 2xl:w-[650px]"
           >
             <CardHeader>
