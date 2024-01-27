@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 
-import { app } from '@/firebase/init_Firebase'
+import { app } from '@/firebase/initFirebase'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
