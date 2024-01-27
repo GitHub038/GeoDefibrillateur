@@ -3,10 +3,22 @@ import { where } from 'firebase/firestore/lite'
 import { Loader2 } from 'lucide-react'
 import { useFetchData } from '../hooks/useFetchData'
 import { getDocsCustom } from '../utils/firebaseApi'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { getLocation } from '@/utils/helpers.js'
+import { getGeoDocs } from '@/utils/firebaseApi'
+import { Button } from './ui/button.jsx'
+import { ThumbsUp } from 'lucide-react'
+import { LocateFixed } from 'lucide-react'
+import { MapPinned } from 'lucide-react'
 
 //Mini component to display loader
 const Loader = () => {
@@ -47,19 +59,39 @@ const DAEList = ({ data }) => {
       >
         {data?.map((entry) => (
           <Card
-            key={entry.gid}
+            key={entry.id}
+
             className="w-[350px] lg:w-[450px] xl:w-[550px] 2xl:w-[650px]"
           >
             <CardHeader>
               <CardTitle className="md:text-2xl text-lg font-semibold	text-primary text-center">
-                {entry.c_nom}
+                ID : {entry.c_gid}
               </CardTitle>
+              <CardDescription className="md:text-lg text-sm text-center font-semibold">
+                <span className="flex flex-row justify-between">
+                  <span className="flex flex-row gap-2 items-center">
+                    <ThumbsUp /> {entry.c_etat_fonct}{' '}
+                  </span>
+                  <span className="flex flex-row gap-2 items-center	">
+                    {entry.distance !== undefined ? (
+                      <>
+                        <MapPinned /> {entry.distance} {'km'}
+                      </>
+                    ) : (
+                      ''
+                    )}
+                  </span>
+                </span>
+              </CardDescription>
               <Separator className="my-4" />
               <CardContent>
                 <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
                     <p>
-                      <span className="font-bold">Rue :</span> {entry.c_adr_num}{' '}
+                      <span className="font-bold">Lieu :</span> {entry.c_nom}
+                    </p>
+                    <p>
+                      <span className="font-bold">Rue :</span>{' '}
                       {entry.c_adr_voie}
                     </p>
                     <p>
@@ -161,7 +193,7 @@ const DaeRender = () => {
 
   useEffect(() => {
     setDae(
-      data && data.docs
+      data
         ? data.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -170,35 +202,78 @@ const DaeRender = () => {
     )
   }, [data])
 
+  const handleClick = () => {
+    getLocation()
+      .then((coords) => {
+        // console.log(
+        //   `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`,
+        // )
+        getGeoDocs('/entries', coords)
+          .then((data) => {
+            // data.forEach((item) => {
+            //   console.log(item.doc)
+            //   // console.log(item.id)
+            //   console.log(item.distance)
+            // })
+            setDae(
+              data
+                ? data.map((item) => ({
+                    id: item.doc.id,
+                    distance: Math.round(item.distance),
+                    ...item.doc.data(),
+                  }))
+                : [],
+            )
+          })
+          .catch((error) => {
+            console.error(
+              'Erreur lors de la récupération des documents : ',
+              error,
+            )
+          })
+      })
+      .catch((error) => {
+        console.error(
+          'Une erreur est survenue lors de la récupération de la localisation :',
+          error,
+        )
+      })
+  }
+
   return (
     <>
       <section className="bg-secondary h-full">
         <div className="flex justify-center items-center flex-col pt-20 sm:pt-32">
-          <div className="relative w-[350px] sm:w-[450px]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-500 left-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          <div className="flex flex-row">
+            <div className="relative w-[350px] sm:w-[450px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-500 left-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <Label className="sr-only" htmlFor="ville" />
+              <Input
+                id="ville"
+                name="ville"
+                type="text"
+                placeholder="Rechercher un DAE par CP ou par ville"
+                className="pl-12 pr-4"
+                onChange={(e) => setCity(e.target.value)}
+                onKeyDown={handleKeyPress}
               />
-            </svg>
-            <Label className="sr-only" htmlFor="ville" />
-            <Input
-              id="ville"
-              name="ville"
-              type="text"
-              placeholder="Rechercher un DAE par CP ou par ville"
-              className="pl-12 pr-4"
-              onChange={(e) => setCity(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
+            </div>
+            <Button onClick={handleClick} size="icon">
+              <LocateFixed className="h-4 w-4" />
+            </Button>
           </div>
         </div>
         {DaeListResult()}
