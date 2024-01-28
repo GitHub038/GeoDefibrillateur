@@ -14,3 +14,4 @@ export const MENU_6 = 'Liste des DAE'
 // export const PATH_6 = '/listeDAE'
 
 export const DISTANCE = 100 // 100km
+export const ENDPOINT = '/entries'

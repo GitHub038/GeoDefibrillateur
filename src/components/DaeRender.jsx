@@ -19,6 +19,7 @@ import { Button } from './ui/button.jsx'
 import { ThumbsUp } from 'lucide-react'
 import { LocateFixed } from 'lucide-react'
 import { MapPinned } from 'lucide-react'
+import { ENDPOINT } from '@/utils/constants.js'
 
 //Mini component to display loader
 const Loader = () => {
@@ -40,7 +41,6 @@ const ErrorMessage = ({ message }) => {
 
 //Mini component to display DAE_List
 const DAEList = React.memo(({ data }) => {
-  console.log('render DAEList')
   if (data?.length === 0) {
     return (
       <div className="flex h-screen w-full justify-center bg-secondary">
@@ -121,7 +121,7 @@ const DAEList = React.memo(({ data }) => {
 })
 
 const initialQuery = getDocsCustom(
-  '/entries',
+  ENDPOINT,
   where('c_etat_fonct', '==', 'En fonctionnement'),
 )
 
@@ -133,22 +133,22 @@ const DaeRender = () => {
   useEffect(() => {
     // Exemple de requetes
     /** Tout les DAE **/
-    // execute(getDocsCustom('/entries'))
+    // execute(getDocsCustom(ENDPOINT))
     /** Tout les DAE d'une Ville **/
     //execute(
-    //  getDocsCustom('/entries', where('c_com_nom', '==', 'Condé-en-Normandie')),
+    //  getDocsCustom(ENDPOINT, where('c_com_nom', '==', 'Condé-en-Normandie')),
     //)
     /** Un DAE avec une longitude et une latitude **/
     //   execute(
     //     getDocsCustom(
-    //       '/entries',
+    //       ENDPOINT,
     //       where('c_lat_coor1', '==', 48.8509),
     //       where('c_long_coor1', '==', -0.541597),
     //     ),
     //   )
     // execute(
     //   getDocsCustom(
-    //     '/entries',
+    //     ENDPOINT,
     //     where('c_etat_fonct', '==', 'En fonctionnement'),
     //   ),
     // )
@@ -160,7 +160,7 @@ const DaeRender = () => {
       const isNumeric = !isNaN(search)
       const newQuery = search
         ? getDocsCustom(
-            '/entries',
+            ENDPOINT,
             where(
               isNumeric ? 'c_com_cp' : 'c_com_nom',
               '==',
@@ -207,7 +207,7 @@ const DaeRender = () => {
         // console.log(
         //   `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`,
         // )
-        getGeoDocs('/entries', coords)
+        getGeoDocs(ENDPOINT, coords)
           .then((data) => {
             // data.forEach((item) => {
             //   console.log(item.doc)
