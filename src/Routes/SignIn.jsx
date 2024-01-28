@@ -27,7 +27,7 @@ const SignIn = () => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        navigate('/profil')
+        navigate('/app')
       })
       .catch((error) => {
         toast({

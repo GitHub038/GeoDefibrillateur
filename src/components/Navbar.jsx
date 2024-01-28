@@ -41,7 +41,7 @@ const LoginToggle = () => {
 }
 
 const navigation = [
-  { name: MENU_1, href: '/searchDAE', current: false },
+  { name: MENU_1, href: '/app', current: false },
   { name: MENU_2, href: '/info', current: false },
   { name: MENU_5, href: '/profil', current: false },
 

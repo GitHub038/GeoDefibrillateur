@@ -13,7 +13,7 @@ function HomePageContent() {
             alt="Illustration d'un DAE"
           />
           <Link
-            to={'/app'}
+            to={'/searchDAE'}
             className="hidden lg:block ml-8 pt-4 lg:ml-[11rem] lg:pt-8"
           >
             <Button

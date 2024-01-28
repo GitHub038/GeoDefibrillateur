@@ -69,7 +69,12 @@ function App() {
     },
     {
       path: '/app',
-      element: <AppDae />,
+      element: (
+        <Protected>
+          {' '}
+          <AppDae />{' '}
+        </Protected>
+      ),
       children: [
         {
           index: true,
