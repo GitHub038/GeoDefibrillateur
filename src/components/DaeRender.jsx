@@ -19,6 +19,7 @@ import { Button } from './ui/button.jsx'
 import { ThumbsUp } from 'lucide-react'
 import { LocateFixed } from 'lucide-react'
 import { MapPinned } from 'lucide-react'
+import { ENDPOINT } from '@/utils/constants.js'
 
 //Mini component to display loader
 const Loader = () => {
@@ -39,7 +40,7 @@ const ErrorMessage = ({ message }) => {
 }
 
 //Mini component to display DAE_List
-const DAEList = ({ data }) => {
+const DAEList = React.memo(({ data }) => {
   if (data?.length === 0) {
     return (
       <div className="flex h-screen w-full justify-center bg-secondary">
@@ -60,7 +61,6 @@ const DAEList = ({ data }) => {
         {data?.map((entry) => (
           <Card
             key={entry.id}
-
             className="w-[350px] lg:w-[450px] xl:w-[550px] 2xl:w-[650px]"
           >
             <CardHeader>
@@ -118,37 +118,37 @@ const DAEList = ({ data }) => {
       </div>
     </>
   )
-}
+})
 
 const initialQuery = getDocsCustom(
-  '/entries',
+  ENDPOINT,
   where('c_etat_fonct', '==', 'En fonctionnement'),
 )
 
 const DaeRender = () => {
-  const [city, setCity] = useState('')
-  const [query, setQuery] = useState(initialQuery)
   const { data, status, error, execute } = useFetchData()
+  const [search, setSearch] = useState('')
+  const [query, setQuery] = useState(initialQuery)
   const [dae, setDae] = useState()
   useEffect(() => {
     // Exemple de requetes
     /** Tout les DAE **/
-    // execute(getDocsCustom('/entries'))
+    // execute(getDocsCustom(ENDPOINT))
     /** Tout les DAE d'une Ville **/
     //execute(
-    //  getDocsCustom('/entries', where('c_com_nom', '==', 'Condé-en-Normandie')),
+    //  getDocsCustom(ENDPOINT, where('c_com_nom', '==', 'Condé-en-Normandie')),
     //)
     /** Un DAE avec une longitude et une latitude **/
     //   execute(
     //     getDocsCustom(
-    //       '/entries',
+    //       ENDPOINT,
     //       where('c_lat_coor1', '==', 48.8509),
     //       where('c_long_coor1', '==', -0.541597),
     //     ),
     //   )
     // execute(
     //   getDocsCustom(
-    //     '/entries',
+    //     ENDPOINT,
     //     where('c_etat_fonct', '==', 'En fonctionnement'),
     //   ),
     // )
@@ -157,20 +157,19 @@ const DaeRender = () => {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      const isNumeric = !isNaN(city)
-      setQuery(
-        city
-          ? getDocsCustom(
-              '/entries',
-              where(
-                isNumeric ? 'c_com_cp' : 'c_com_nom',
-                '==',
-                isNumeric ? parseInt(city) : city,
-              ),
-              where('c_etat_fonct', '==', 'En fonctionnement'),
-            )
-          : initialQuery,
-      )
+      const isNumeric = !isNaN(search)
+      const newQuery = search
+        ? getDocsCustom(
+            ENDPOINT,
+            where(
+              isNumeric ? 'c_com_cp' : 'c_com_nom',
+              '==',
+              isNumeric ? parseInt(search) : search,
+            ),
+            where('c_etat_fonct', '==', 'En fonctionnement'),
+          )
+        : initialQuery
+      setQuery(newQuery)
     }
   }
 
@@ -208,7 +207,7 @@ const DaeRender = () => {
         // console.log(
         //   `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`,
         // )
-        getGeoDocs('/entries', coords)
+        getGeoDocs(ENDPOINT, coords)
           .then((data) => {
             // data.forEach((item) => {
             //   console.log(item.doc)
@@ -260,14 +259,14 @@ const DaeRender = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              <Label className="sr-only" htmlFor="ville" />
+              <Label className="sr-only" htmlFor="search" />
               <Input
-                id="ville"
-                name="ville"
+                id="search"
+                name="search"
                 type="text"
                 placeholder="Rechercher un DAE par CP ou par ville"
                 className="pl-12 pr-4"
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={handleKeyPress}
               />
             </div>

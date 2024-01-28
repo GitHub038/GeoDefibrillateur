@@ -1,6 +1,7 @@
 import { collection, getDocs, query } from 'firebase/firestore/lite'
 import { db } from '../firebase/init_Firebase'
 import { calculateDistance } from '../utils/helpers.js'
+import { DISTANCE } from './constants.js'
 
 const getDocsCustom = async (endpoint, ...whereOptions) => {
   const collectionRef = collection(db, endpoint)
@@ -27,7 +28,7 @@ const getGeoDocs = async (endpoint, center) => {
       lat,
       lon,
     )
-    if (distance <= 100) {
+    if (distance <= DISTANCE) {
       docs.push({
         doc,
         distance,
