@@ -12,3 +12,5 @@ export const MENU_6 = 'Liste des DAE'
 // export const PATH_3 = '/auth'
 // export const PATH_5 = '/profil'
 // export const PATH_6 = '/listeDAE'
+
+export const DISTANCE = 100 // 100km

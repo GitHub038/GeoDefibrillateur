@@ -39,7 +39,8 @@ const ErrorMessage = ({ message }) => {
 }
 
 //Mini component to display DAE_List
-const DAEList = ({ data }) => {
+const DAEList = React.memo(({ data }) => {
+  console.log('render DAEList')
   if (data?.length === 0) {
     return (
       <div className="flex h-screen w-full justify-center bg-secondary">
@@ -60,7 +61,6 @@ const DAEList = ({ data }) => {
         {data?.map((entry) => (
           <Card
             key={entry.id}
-
             className="w-[350px] lg:w-[450px] xl:w-[550px] 2xl:w-[650px]"
           >
             <CardHeader>
@@ -118,7 +118,7 @@ const DAEList = ({ data }) => {
       </div>
     </>
   )
-}
+})
 
 const initialQuery = getDocsCustom(
   '/entries',
@@ -126,9 +126,9 @@ const initialQuery = getDocsCustom(
 )
 
 const DaeRender = () => {
-  const [city, setCity] = useState('')
-  const [query, setQuery] = useState(initialQuery)
   const { data, status, error, execute } = useFetchData()
+  const [search, setSearch] = useState('')
+  const [query, setQuery] = useState(initialQuery)
   const [dae, setDae] = useState()
   useEffect(() => {
     // Exemple de requetes
@@ -157,20 +157,19 @@ const DaeRender = () => {
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      const isNumeric = !isNaN(city)
-      setQuery(
-        city
-          ? getDocsCustom(
-              '/entries',
-              where(
-                isNumeric ? 'c_com_cp' : 'c_com_nom',
-                '==',
-                isNumeric ? parseInt(city) : city,
-              ),
-              where('c_etat_fonct', '==', 'En fonctionnement'),
-            )
-          : initialQuery,
-      )
+      const isNumeric = !isNaN(search)
+      const newQuery = search
+        ? getDocsCustom(
+            '/entries',
+            where(
+              isNumeric ? 'c_com_cp' : 'c_com_nom',
+              '==',
+              isNumeric ? parseInt(search) : search,
+            ),
+            where('c_etat_fonct', '==', 'En fonctionnement'),
+          )
+        : initialQuery
+      setQuery(newQuery)
     }
   }
 
@@ -260,14 +259,14 @@ const DaeRender = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              <Label className="sr-only" htmlFor="ville" />
+              <Label className="sr-only" htmlFor="search" />
               <Input
-                id="ville"
-                name="ville"
+                id="search"
+                name="search"
                 type="text"
                 placeholder="Rechercher un DAE par CP ou par ville"
                 className="pl-12 pr-4"
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={handleKeyPress}
               />
             </div>
