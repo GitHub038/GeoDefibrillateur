@@ -9,6 +9,7 @@ import {
 import 'leaflet/dist/leaflet.css'
 import { divIcon, point } from 'leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
+import { Key } from 'lucide-react'
 
 // Source https://react-leaflet.js.org/docs/example
 function LocationMarker() {
@@ -30,7 +31,7 @@ function LocationMarker() {
   )
 }
 
-const MapContain = ({ markers, icon }) => {
+const MapContainApp = ({ markers, icon }) => {
   return (
     <>
       {' '}
@@ -47,9 +48,12 @@ const MapContain = ({ markers, icon }) => {
         <LocationMarker />
         <MarkerClusterGroup>
           {markers.map((marker, index) => (
-            <Marker position={marker?.geocode} icon={icon}>
+            <Marker position={marker?.geocode} icon={icon} key={index}>
               <Popup>{marker?.popUp}</Popup>
             </Marker>
+            // <Marker position={marker.geocode} icon={icon} key={index}>
+            //   <Popup>{marker.popUp}</Popup>
+            // </Marker>
           ))}
         </MarkerClusterGroup>
       </MapContainer>
@@ -58,4 +62,4 @@ const MapContain = ({ markers, icon }) => {
   )
 }
 
-export default MapContain
+export default MapContainApp

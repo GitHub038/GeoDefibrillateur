@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import MapContain from './MapContain'
+import MapContainApp from './MapContainApp'
 import { Icon } from 'leaflet'
 
 const Map = () => {
@@ -63,8 +63,8 @@ const Map = () => {
         </button>
       </div>
       <div className="h-full border-4">
-        <MapContain markers={markers} icon={customsIcon} />
-        {/* <MapContain lat={lat} lng={lng} /> */}
+        <MapContainApp markers={markers} icon={customsIcon} />
+        {/* <MapContainApp lat={lat} lng={lng} /> */}
       </div>
     </div>
   )

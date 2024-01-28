@@ -89,8 +89,13 @@ const DaeRender = () => {
   const { data, status, error, execute } = useFetchData()
 
   const [dae, setDae] = useState()
-
-  const [positions, setPositions] = useState([])
+  // const [positions, setPositions] = useState([])
+  const [positions, setPositions] = useState([
+    {
+      geocode: [48.86, 2.3522],
+      popUp: 'Hello, je suis le DAE test 1',
+    },
+  ])
 
   useEffect(() => {
     // Exemple de requetes
@@ -118,7 +123,7 @@ const DaeRender = () => {
   //   setDae(
   //     data && data.docs
   //       ? data.docs.map((doc) => ({
-  //           id: doc.gid,
+  //           id: doc.id,
   //           ...doc.data(),
   //         }))
   //       : [],
@@ -140,78 +145,72 @@ const DaeRender = () => {
   //   }
   // }, [data, positions])
 
-  useEffect(() => {
-    console.log(data)
-    if (data && data.docs) {
-      const newPositions = data.docs.map((dae1) => {
-        const { c_lat_coor1, c_long_coor1, c_nom } = dae1.data()
-        return [
-          {
-            // geocode: `[${c_lat_coor1}, ${c_long_coor1}]`,
-            // geocode: { c_lat_coor1, c_long_coor1 },
-            geocode: [c_lat_coor1, c_long_coor1],
-            // geocode: [c_lat_coor1.value(), c_long_coor1.value()],
-            popUp: `Hello, je suis le DAE : ${c_nom}`,
-          },
-        ]
-      })
+  // useEffect(() => {
+  //   if (data && data.docs) {
+  //     const newPositions = data.docs.map((dae) => {
+  //       const { c_lat_coor1, c_long_coor1, c_nom } = dae.data()
+  //       return [
+  //         {
+  //           geocode: `[${c_lat_coor1}, ${c_long_coor1}]`,
+  //           popUp: `Hello, je suis le DAE : ${c_nom}`,
+  //         },
+  //       ]
+  //     })
 
-      setPositions((prevPositions) => [...newPositions, ...prevPositions])
-    }
-  }, [data])
+  //     setPositions((prevPositions) => [...newPositions, ...prevPositions])
+  //   }
+  //   // Removed 'positions' from the dependency array since we're using a functional update now
+  // }, [data])
 
-  console.log(positions.length)
-  console.log(typeof positions)
-  // console.log(positions[0].length)
+  // console.log(positions)
 
   const DaeListResult = () => {
-    console.log(positions[0])
+    console.log(positions)
+    return (
+      <div className="h-full border-4">
+        <MapContainApp markers={positions} icon={customsIcon} />
+      </div>
+    )
+    // switch (status) {
+    //   case 'failure':
+    //     return <ErrorMessage message={error} />
+    //   case 'loading':
+    //     return <Loader />
+    //   case 'done':
+    //     // return <DAEList data={dae} />
+    //     // return <DAEPosition positions={positions} />
+    //     // return <Map />
+    //     return <MapContainApp markers={positions} icon={customsIcon} />
+    //   // return (
+    //   //   <>
+    //   //     <MapContainer
+    //   //       center={{ lat: 46.7111, lng: 1.7191 }}
+    //   //       zoom={6.5}
+    //   //       scrollWheelZoom={false}
+    //   //       style={{ height: '100%' }}
+    //   //     >
+    //   //       <TileLayer
+    //   //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //   //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    //   //       />
 
-    switch (status) {
-      case 'failure':
-        return <ErrorMessage message={error} />
-      case 'loading':
-        return <Loader />
-      case 'done':
-        // return <DAEList data={dae} />
-        // return (
-        //   <MapContainApp
-        //     markers={positions}
-        //     icon={customsIcon}
-        //     className="h-full w-full border-4 absolute"
-        //   />
-        // )
-        return (
-          <div className="mt-20 mb-20 h-full w-full border-4 absolute">
-            <MapContainer
-              center={{ lat: 46.7111, lng: 1.7191 }}
-              zoom={6.5}
-              scrollWheelZoom={false}
-              style={{ height: '100%' }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+    //   //       <MarkerClusterGroup>
+    //   //         {positions.map((marker, index) => (
+    //   //           // console.log(marker),
+    //   //           // console.log(marker[0].geocode),
+    //   //           // console.log(marker[0].popUp),
+    //   //           <Marker position={marker[0].geocode} icon={customsIcon}>
+    //   //             <Popup>{marker[0].popUp}</Popup>
+    //   //           </Marker>
+    //   //         ))}
+    //   //       </MarkerClusterGroup>
+    //   //     </MapContainer>
+    //   //   </>
+    //   // )
 
-              <MarkerClusterGroup>
-                {positions.map((marker, index) => (
-                  <Marker
-                    position={marker[0].geocode}
-                    icon={customsIcon}
-                    key={index}
-                  >
-                    <Popup>{marker[0].popUp}</Popup>
-                  </Marker>
-                ))}
-              </MarkerClusterGroup>
-            </MapContainer>
-          </div>
-        )
-
-      default:
-        return <>{status}</>
-    }
+    //   default:
+    //     return <>{status}</>
+    // }
   }
 
   return <>{DaeListResult()}</>
