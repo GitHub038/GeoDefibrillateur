@@ -110,7 +110,7 @@ const FormProfil = () => {
 
   return (
     <div className="bg-secondary h-full mt-[-40px]">
-      <div className="h-full w-full mx-auto flex justify-center items-center flex-col pt-20 pb-0 sm:pt-32 sm:pb-32 gap-6 px-4 sm:px-8">
+      <div className="h-full w-full mx-auto flex justify-center items-center flex-col pt-20 pb-8 sm:pt-32 sm:pb-32 gap-6 px-4 sm:px-8">
         <Card className="w-[350px] md:w-[750px]">
           <CardHeader>
             <CardTitle className="md:text-2xl text-lg font-semibold	text-primary text-center">
