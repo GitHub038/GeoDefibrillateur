@@ -12,10 +12,7 @@ function HomePageContent() {
             src="/content-DAE.svg"
             alt="Illustration d'un DAE"
           />
-          <Link
-            to={'/searchDAE'}
-            className="hidden lg:block ml-8 pt-4 lg:ml-[11rem] lg:pt-8"
-          >
+          <div className="hidden lg:block ml-8 pt-4 lg:ml-[11rem] lg:pt-8">
             <Button
               className="animate-heartbeat hover:animate-none hover:bg-primary"
               variant="destructive"
@@ -23,7 +20,7 @@ function HomePageContent() {
             >
               <Link to="/rechercheDAE">Localisez-moi</Link>
             </Button>
-          </Link>
+          </div>
         </div>
         <div className="pt-5 font-light text-gray-500 sm:text-lg dark:text-gray-400 z-0">
           <h2 className="text-center lg:text-justify mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl">
