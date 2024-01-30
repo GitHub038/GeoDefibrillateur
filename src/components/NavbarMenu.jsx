@@ -14,6 +14,7 @@ import { Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function NavbarMenu({ navigation }) {
+  console.log('navigation', navigation)
   const { theme, setTheme } = useTheme()
   const oppositeTheme = theme === 'dark' ? 'light' : 'dark'
   return (
@@ -43,12 +44,15 @@ function NavbarMenu({ navigation }) {
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {navigation.map((item) => (
-            <DropdownMenuItem key={item.id}>
+            <DropdownMenuItem
+              key={item.id}
+              className={item.name === false ? 'hidden' : ''}
+            >
               <Link
                 to={item.href}
                 className={classNames(
                   item.current
-                    ? 'rounded-l-none hover:cursor-pointer hover:border-l-2 hover:border-primary'
+                    ? 'rounded-l-none hover:cursor-pointer border-l-2 border-primary'
                     : 'rounded-l-none hover:cursor-pointer hover:border-l-2 hover:border-primary',
                 )}
                 aria-current={item.current ? 'page' : undefined}

@@ -19,8 +19,9 @@ function HomePageContent() {
             <Button
               className="animate-heartbeat hover:animate-none hover:bg-primary"
               variant="destructive"
+              asChild
             >
-              Localisez-moi
+              <Link to="/rechercheDAE">Localisez-moi</Link>
             </Button>
           </Link>
         </div>

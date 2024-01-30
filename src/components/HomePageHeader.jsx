@@ -15,8 +15,9 @@ function HomePageHeader() {
             <Button
               className="text-2xl font-bold p-8 animate-heartbeat hover:animate-none hover:bg-primary"
               variant="destructive"
+              asChild
             >
-              Localisez-moi
+              <Link to="/rechercheDAE">Localisez-moi</Link>
             </Button>
           </Link>
         </div>
