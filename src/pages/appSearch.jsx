@@ -74,7 +74,7 @@ const AppSearchDae = () => {
           c_lat_coor1,
           c_long_coor1,
           c_nom,
-          c_etat_valid,
+          // c_etat_valid,
           c_adr_num,
           c_adr_voie,
           c_com_cp,
