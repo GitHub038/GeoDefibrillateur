@@ -131,7 +131,7 @@ function Navbar() {
                     alt="Logo GeoDefibrillateurs"
                   />
                   <div className="cursor-pointer whitespace-nowrap drop-shadow px-1 font-extrabold italic text-lg text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
-                    GeoDÃ©fibrillateurs
+                    GeoDéfibrillateurs
                   </div>
                 </Link>
               </div>
