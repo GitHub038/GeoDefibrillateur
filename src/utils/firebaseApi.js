@@ -1,6 +1,16 @@
+// export const getAllData = async (endpoint) => {
+//   const querySnapshot = await getDocs(collection(db, endpoint))
+//   querySnapshot.forEach((doc) => {
+//     return doc.id, ' => ', doc.data()
+//   })
+
+//   return querySnapshot
+// }
+
 import { collection, getDocs, query } from 'firebase/firestore/lite'
 import { db } from '../firebase/init_Firebase'
-import { calculateDistance } from '../utils/helpers.js'
+
+import { calculateDistance } from './helpers.js'
 import { DISTANCE } from './constants.js'
 
 const getDocsCustom = async (endpoint, ...whereOptions) => {

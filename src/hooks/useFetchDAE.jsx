@@ -17,8 +17,9 @@ const useFetchDAE = () => {
         setIsLoading(true)
         setError('')
         const response = await fetch(URL)
+        // console.log(response)
         if (!response.ok) {
-          throw new Error('Something went wrong with fetching movies')
+          throw new Error('Something went wrong with fetching data')
         }
         const data = await response.json()
         setData(data)
