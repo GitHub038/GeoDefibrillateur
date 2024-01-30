@@ -5,14 +5,14 @@ import { RouterProvider } from 'react-router-dom'
 import AuthContext from './Context/AuthContext'
 import Protected from './Routes/Protected'
 import Authentification from './pages/authentification'
-import DaeRender from './components/DaeRender'
+// import DaeRender from './components/DaeRender'
 import HomePage from './pages/homePage'
 import HowToUse from './pages/HowToUse'
 import Profil from './pages/profil/profil'
 import { Navbar } from './components/Navbar.jsx'
 import { Footer } from './components/Footer.jsx'
 import { ThemeProvider } from './Context/ThemeContext.jsx'
-import AppDae from './pages/appDae'
+// import AppDae from './pages/appDae'
 
 
 import RegionList from './components/appDAE/RegionList'
@@ -20,9 +20,10 @@ import DaeList from './components/appDAE/DaeList'
 import ErrorPage404 from './pages/errorPage404'
 import { useEffect, useState } from 'react'
 import useFetchDAE from './hooks/useFetchDAE'
-import Dae from './components/appDAE/Dae'
-import SearchDae from './components/appDAE/SearchDae'
-import FormDae from './components/appDAE/FormDae'
+// import Dae from './components/appDAE/Dae'
+// import SearchDae from './components/appDAE/SearchDae'
+// import FormDae from './components/appDAE/FormDae'
+import AppSearchDae from './pages/appSearch'
 
 function App() {
   const { data, isLoadingDAE } = useFetchDAE()
@@ -40,7 +41,7 @@ function App() {
     },
     {
       path: '/searchDAE',
-      element: <DaeRender />,
+      element: <AppSearchDae />,
     },
     {
       path: '/info',
@@ -68,45 +69,45 @@ function App() {
       element: <SignIn />,
     },
     {
-      path: '/app',
-      element: (
-        <Protected>
-          {' '}
-          <AppDae />{' '}
-        </Protected>
-      ),
-      children: [
-        {
-          index: true,
-          element: <Navigate to="/app/daeList" replace />,
-        },
-        {
-          path: 'daeList',
-          // element: <DaeList daeList={datasliced} isLoading={isLoading} />,
-          element: <DaeList daeList={data} isLoading={isLoading} />,
-        },
-        {
-          path: 'daeList/:gid',
-          element: <Dae />,
-        },
-        {
-          path: 'regions',
-          element: <RegionList />,
-        },
-        {
-          path: 'search',
-          element: <SearchDae />,
-        },
-        {
-          path: 'formdae',
-          element: <FormDae />,
-        },
-      ],
-    },
-    {
       path: '*',
       element: <ErrorPage404 />,
     },
+    // {
+    //   path: '/app',
+    //   element: (
+    //     <Protected>
+    //       {' '}
+    //       <AppDae />{' '}
+    //     </Protected>
+    //   ),
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <Navigate to="/app/daeList" replace />,
+    //     },
+    //     {
+    //       path: 'daeList',
+    //       // element: <DaeList daeList={datasliced} isLoading={isLoading} />,
+    //       element: <DaeList daeList={data} isLoading={isLoading} />,
+    //     },
+    //     {
+    //       path: 'daeList/:gid',
+    //       element: <Dae />,
+    //     },
+    //     {
+    //       path: 'regions',
+    //       element: <RegionList />,
+    //     },
+    //     {
+    //       path: 'search',
+    //       element: <SearchDae />,
+    //     },
+    //     {
+    //       path: 'formdae',
+    //       element: <FormDae />,
+    //     },
+    //   ],
+    // },
   ])
 
   return (
