@@ -1,19 +1,17 @@
-// import { app } from '@/firebase/init_Firebase'
 import { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-
-import { Button } from '@/components/ui/button'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
 
-import { app } from '@/firebase/init_Firebase'
-
+import { app } from '@/firebase/initFirebase'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
 
-// const SignUp = ({ isLoading }) => {
-const SignUp = () => {
+// const SignIn = ({ isLoading }) => {
+const SignIn = () => {
   const { toast } = useToast()
 
   const [email, setEmail] = useState('')
@@ -22,26 +20,24 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const auth = getAuth(app)
-  const handleSignUp = async (e) => {
+  const navigate = useNavigate()
+
+  const handleSignIn = async (e) => {
     setIsLoading(true)
     e.preventDefault()
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        toast({
-          title: '🎉 Bravo, compte crée avec succès !',
-          description: 'Cliquez sur "Connectez-vous", et identifiez-vous!',
-        })
+        navigate('/profil')
       })
       .catch((error) => {
         toast({
           title: '🤷🏾 Attention!',
           description:
-            error.message || 'Une erreur est survenue. Veuillez réessayer',
+            'Vérifier votre email et mot de passe ou Inscrivez-vous !',
         })
       })
       .finally(() => setIsLoading(false))
   }
-
   return (
     <div>
       <form action="#">
@@ -70,7 +66,7 @@ const SignUp = () => {
               type="password"
               placeholder="Mot de passe"
               autoCapitalize="none"
-              autoComplete="new-password"
+              autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
               onChange={(e) => setPassword(e.target.value)}
@@ -79,10 +75,10 @@ const SignUp = () => {
           <Button
             disabled={isLoading}
             type="submit"
-            onClick={(e) => handleSignUp(e)}
+            onClick={(e) => handleSignIn(e)}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            S'inscrire
+            Se connecter
           </Button>
         </div>
       </form>
@@ -90,5 +86,4 @@ const SignUp = () => {
     </div>
   )
 }
-
-export default SignUp
+export default SignIn

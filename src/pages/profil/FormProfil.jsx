@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { getAuth, updateProfile } from '@firebase/auth'
-import { storage } from '../../firebase/init_Firebase.js'
+import { storage } from '../../firebase/initFirebase.js'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
