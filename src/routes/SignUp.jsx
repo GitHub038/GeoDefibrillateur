@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 import { app } from '@/firebase/initFirebase'
-
+import { useNavigate } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
@@ -15,7 +15,7 @@ import { Loader2 } from 'lucide-react'
 // const SignUp = ({ isLoading }) => {
 const SignUp = () => {
   const { toast } = useToast()
-
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -27,16 +27,16 @@ const SignUp = () => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        toast({
-          title: '🎉 Bravo, compte crée avec succès !',
-          description: 'Cliquez sur "Connectez-vous", et identifiez-vous!',
-        })
+        // toast({
+        //   title: '🎉 Bravo, compte crée avec succès !',
+        //   description: 'Cliquez sur "Connectez-vous", et identifiez-vous!',
+        // })
+        navigate('/profil')
       })
       .catch((error) => {
         toast({
-          title: '🤷🏾 Attention!',
-          description:
-            error.message || 'Une erreur est survenue. Veuillez réessayer',
+          title: '🤷🏾 Attention !',
+          description: 'Une erreur est survenue. Veuillez réessayer', //error.message ||
         })
       })
       .finally(() => setIsLoading(false))
