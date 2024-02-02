@@ -1,5 +1,5 @@
-import SignIn from '@/Routes/SignIn'
-import SignUp from '@/Routes/SignUp'
+import SignIn from '@/routes/SignIn'
+import SignUp from '@/routes/SignUp'
 
 // import { AuthWithGithub } from './AuthWithGithub'
 
