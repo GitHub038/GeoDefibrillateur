@@ -9,11 +9,7 @@ import {
 // import { RouterProvider } from 'react-router-dom'
 import AuthContext from './context/AuthContext'
 import Protected from './routes/Protected'
-<<<<<<< HEAD
 import Authentification from './pages/Authentification'
-=======
-import Authentification from './pages/authentification'
->>>>>>> 56f9c2041c96f190f801dce06e3a74a2aa55eb54
 // import DaeRender from './components/DaeRender'
 import HomePage from './pages/HomePage'
 import HowToUse from './pages/HowToUse'
