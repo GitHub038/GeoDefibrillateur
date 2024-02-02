@@ -1,4 +1,4 @@
-import FormProfil from './formProfil'
+import FormProfil from './FormProfil'
 
 const Profil = () => {
   return (
