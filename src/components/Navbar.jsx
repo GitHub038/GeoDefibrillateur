@@ -63,13 +63,11 @@ function Navbar() {
     else {
       return (
         <>
-          <div className="lg:hidden" onClick={handleSignOut}>
-            {MENU_4}
-          </div>
-          <CircleUserRound
-            className="hidden lg:inline-block lg:h-5 lg:w-auto"
+          <div onClick={handleSignOut}>{MENU_4}</div>
+          {/* <CircleUserRound
+            className="hidden lg:inline-block lg:h-5 lg:w-auto" //className="lg:hidden"
             onClick={handleSignOut}
-          />{' '}
+          />{' '} */}
         </>
       )
     }
