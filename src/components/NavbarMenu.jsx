@@ -14,7 +14,6 @@ import { Moon, Sun } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function NavbarMenu({ navigation }) {
-  console.log('navigation', navigation)
   const { theme, setTheme } = useTheme()
   const oppositeTheme = theme === 'dark' ? 'light' : 'dark'
   return (

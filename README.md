@@ -1,70 +1,193 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT SHIELDS -->
 
-## Available Scripts
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-In the project directory, you can run:
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/GitHub038/ProjetEnEquipe/">
+    <img src="/public/GeoDefibrillateurs.svg" alt="Logo" width="80" height="80">
+  </a>
 
-### `npm start`
+<h3 align="center">GéoDéfibrillateurs</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  <p align="center">
+    Trouver un défibrillateur en 1 clic avec GéoDéfibrillateurs !
+    <br />
+    <a href="https://github.com/GitHub038/ProjetEnEquipe/"><strong>Voir le projet »</strong></a>
+    <br />
+    <br />
+    <a href="https://geodefibrillateurs.netlify.app/" target="_blank">Voir Démo</a>
+    ·
+    <a href="https://github.com/GitHub038/ProjetEnEquipe/issues">Signaler Bug</a>
+  </p>
+</div>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table des matières</summary>
+  <ol>
+    <li>
+      <a href="#à-propos-de-ce-projet">À propos de ce projet</a>
+      <ul>
+        <li><a href="#bibliothèques-et-frameworks">Bibliothèques et frameworks</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#pour-commencer">Pour commencer</a>
+      <ul>
+        <li><a href="#configuration requise">Configuration requise</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+        <li><a href="#éléments-techniques">Éléments techniques</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#remerciements">Remerciements</a></li>
+  </ol>
+</details>
 
-### `npm test`
+<!-- ABOUT THE PROJECT -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## À propos de ce projet
 
-### `npm run build`
+[![Product Name Screen Shot][product-screenshot]](https://geodefibrillateurs.netlify.app/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Trouver un défibrillateur automatisés externes (DAE) avec l'[API](https://api-geodae.sante.gouv.fr/api/doc) des défibrillateurs déclarés dans la base nationale [Géo'DAE](https://www.data.gouv.fr/fr/datasets/61556e1e9d6adb2df86eb0fc/) !
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+GéoDéfibrillateurs rend accessible cette donnée qui peut sauver une vie. En effet :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> _À peine 1 citoyen sur 10 survit à un arrêt cardiaque faute d'avoir bénéficié au bon moment de l'intervention d'une personne, le temps que les secours interviennent.Cette personne aurait pu leur sauver la vie en pratiquant les gestes de premier secours et en relançant le cœur par un choc électrique en utilisant un DAE._
 
-### `npm run eject`
+<p align="right">(<a href="#readme-top">⬆️</a>)</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Bibliothèques et frameworks
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [![Vite][Vite.js]][Vite-url]
+- [![React][React.js]][React-url]
+- [![Firebase][Firebase]][Firebase-url]
+- [![Netlify][Netlify]][Netflify-url]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<p align="right">(<a href="#readme-top">⬆️</a>)</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- GETTING STARTED -->
 
-## Learn More
+## Pour commencer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Pour mettre en place une copie locale et la faire fonctionner, suivez les étapes suivantes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Configuration requise
 
-### Code Splitting
+- [git][git] v2.43 ou supérieure
+- [NodeJS][node] v20.10 ou supérieur
+- [npm][npm] v10.2.3 ou supérieure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Pour vérifier qu'ils sont correctement installés et configuré vous pouvez executer :
 
-### Analyzing the Bundle Size
+```shell
+git --version
+node --version
+npm --version
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Installation
 
-### Making a Progressive Web App
+1. Cloner le repo
+   ```sh
+   git clone https://github.com/GitHub038/ProjetEnEquipe/.git
+   ```
+2. Installer les paquets NPM
+   ```sh
+   npm i
+   ```
+3. Configurer les variables d'environnement selon votre choix de base de données
+4. Lancer le projet à l'aide de la commande suivante :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```sh
+   npm start
+```
 
-### Advanced Configuration
+<p align="right">(<a href="#readme-top">⬆️</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<!-- ELEMENT TECHNIQUE -->
 
-### Deployment
+## Éléments techniques
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Ce projet regroupe les éléments techniques suivants :
 
-### `npm run build` fails to minify
+- React Hooks
+- Bibliothèque de composants
+- Context API (ou State Manager)
+- Gestion de l'authentification (Login/Register)
+- Intégration d'une API
+- Réalisation de tests
+- Mise en production / Déploiement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Ce que nous avons utilisé :
+
+- Bibliothèque de composants : [Tailwind-ccs](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), [Lucide React](https://lucide.dev/guide/packages/lucide-react)
+- Authentification et base de données : [Firebase][Firebase-url]
+- Intégration d'une API : [Géo'DAE](https://www.data.gouv.fr/fr/datasets/61556e1e9d6adb2df86eb0fc/)
+- Tests : [Vitest](https://vitest.dev/), [Testing-library](https://testing-library.com/)
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+- [x] Écrire la documentation
+- [ ] _Tests_ :
+  - [ ] Finir les tests d'intégration
+  - [ ] Établir les test e2e avec `cypress`
+- [ ] _Refactors_ :
+  - [ ] Réorganiser et restructurer le code afin de favoriser sa lisibilité et sa clarté, mais aussi pour faciliter les tests
+- [ ] _Authentification_ : Ajout de la fonctionnalité "Mot de passe oublié"
+
+<p align="right">(<a href="#readme-top">⬆️</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Sao dev - [GitHub](https://github.com/GitHub038)
+Bamba Thiam - [GitHub](https://github.com/BambaThiam)
+Pierre-Henri Merrer - [Portfolio](https://ph-merrer.fr/)
+
+Lien du projet : [https://geodefibrillateurs.netlify.app/](https://geodefibrillateurs.netlify.app/)
+
+<p align="right">(<a href="#readme-top">⬆️</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Remerciements
+
+- [MikeCodeur](https://github.com/MikeCodeur)
+- [Dimitri L](https://github.com/drimov)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/GitHub038/ProjetEnEquipe.svg?style=for-the-badge
+[contributors-url]: https://github.com/GitHub038/ProjetEnEquipe/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/GitHub038/ProjetEnEquipe.svg?style=for-the-badge
+[forks-url]: https://github.com/GitHub038/ProjetEnEquipe/network/members
+[stars-shield]: https://img.shields.io/github/stars/GitHub038/ProjetEnEquipe.svg?style=for-the-badge
+[stars-url]: https://github.com/GitHub038/ProjetEnEquipe/stargazers
+[issues-shield]: https://img.shields.io/github/issues/GitHub038/ProjetEnEquipe.svg?style=for-the-badge
+[issues-url]: https://github.com/GitHub038/ProjetEnEquipe/issues
+[product-screenshot]: /public/screenshot.gif
+[React.js]: https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=white
+[React-url]: https://reactjs.org/
+[Vite.js]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+[Vite-url]: https://vitejs.dev/guide/
+[Firebase]: https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white
+[Firebase-url]: https://firebase.google.com/docs?hl=fr
+[Netlify]: https://img.shields.io/badge/netlify-%ff9900.svg?style=for-the-badge&logo=netlify&logoColor=white
+[Netflify-url]: https://docs.netlify.com/
+[git]: https://git-scm.com/
+[node]: https://nodejs.org
+[npm]: https://www.npmjs.com/

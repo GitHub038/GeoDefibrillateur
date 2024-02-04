@@ -35,8 +35,8 @@ const FormProfil = () => {
   useEffect(() => {
     if (!nameParts.length) {
       toast({
-        title: '👋 Première connexion ? ',
-        description: 'Remplissez votre profil',
+        title: '👋 Bienvenue sur votre compte !',
+        description: 'Remplissez votre profil 👍',
       })
     }
   }, [nameParts.length, toast])
@@ -45,6 +45,7 @@ const FormProfil = () => {
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState(userImage)
   const [disabled, setDisabled] = useState(true)
+  const [action, setAction] = useState('')
   const onSubmitForm = (e) => {
     e.preventDefault()
     if (firstName && lastName) {
@@ -73,6 +74,7 @@ const FormProfil = () => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
       setDisabled(false)
+      setAction('animate-heartbeat')
     }
   }
 
@@ -106,6 +108,7 @@ const FormProfil = () => {
         console.log(error)
       })
     setDisabled(true)
+    setAction('')
   }
 
   return (
@@ -148,7 +151,11 @@ const FormProfil = () => {
           </CardContent>
           <CardFooter className="flex flex-col sm:flex-row gap-4 justify-between items-center">
             <Input type="file" onChange={handleImageChange} />
-            <Button disabled={disabled} onClick={handleSubmit}>
+            <Button
+              disabled={disabled}
+              onClick={handleSubmit}
+              className={action}
+            >
               <Image className="mr-2 h-4 w-4" />
               Ajouter / modifier
             </Button>
@@ -197,6 +204,11 @@ const FormProfil = () => {
                 firstName === userFirstName && lastName === userLastName
               }
               onClick={onSubmitForm}
+              className={
+                firstName === userFirstName && lastName === userLastName
+                  ? ''
+                  : 'animate-heartbeat'
+              }
             >
               <CircleUserRound className="mr-2 h-4 w-4" />
               Enregistrer
@@ -260,7 +272,7 @@ const FormProfil = () => {
                   <img src="/github-logo.png" alt="logo de google" />
                   <div>GitHub</div>
                 </div>
-                <Button disabled={disabled}>
+                <Button disabled>
                   <Unplug className="mr-2 h-4 w-4" />
                   Connecter
                 </Button>
@@ -272,7 +284,7 @@ const FormProfil = () => {
                   <img src="/google-logo.png" alt="logo de google" />
                   <div>Google</div>
                 </div>
-                <Button disabled={disabled}>
+                <Button disabled>
                   <Unplug className="mr-2 h-4 w-4" />
                   Connecter
                 </Button>
@@ -301,7 +313,7 @@ const FormProfil = () => {
             </div>
           </CardContent>
           <CardFooter className="justify-center sm:justify-start">
-            <Button disabled={disabled}>
+            <Button disabled>
               <Trash2 className="mr-2 h-4 w-4" />
               Supprimer le compte
             </Button>
