@@ -19,7 +19,7 @@ const Loader = () => {
   )
 }
 
-//Mini component to display error
+
 const ErrorMessage = ({ message }) => {
   return (
     <div className="error">
@@ -44,7 +44,6 @@ const AppSearchDae = () => {
     ENDPOINT,
     where('c_etat_fonct', '==', 'En fonctionnement'),
   )
-
 
   useEffect(() => {
     /** Tous les DAE **/
@@ -94,10 +93,7 @@ const AppSearchDae = () => {
       case 'done':
         return (
           <div className="flex flex-row md:flex-col h-screen mt-20 m-2  overscroll-none h-[calc(100vh_-_4.8rem) relative">
-            <div className="bg-slate-700 h-full rounded-lg items-center ">
-              <p>test</p>
-            </div>
-            <div className=" h-full w-4/6 border-4 absolute">
+            <div className=" h-full w-full rounded-2xl  absolute">
               <MapContainer
                 center={{ lat: 46.7111, lng: 1.7191 }}
                 zoom={6.5}

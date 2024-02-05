@@ -64,10 +64,6 @@ function Navbar() {
       return (
         <>
           <div onClick={handleSignOut}>{MENU_4}</div>
-          {/* <CircleUserRound
-            className="hidden lg:inline-block lg:h-5 lg:w-auto" //className="lg:hidden"
-            onClick={handleSignOut}
-          />{' '} */}
         </>
       )
     }
