@@ -131,27 +131,6 @@ const DaeRender = () => {
   const [query, setQuery] = useState(initialQuery)
   const [dae, setDae] = useState()
   useEffect(() => {
-    // Exemple de requetes
-    /** Tout les DAE **/
-    // execute(getDocsCustom(ENDPOINT))
-    /** Tout les DAE d'une Ville **/
-    //execute(
-    //  getDocsCustom(ENDPOINT, where('c_com_nom', '==', 'Condé-en-Normandie')),
-    //)
-    /** Un DAE avec une longitude et une latitude **/
-    //   execute(
-    //     getDocsCustom(
-    //       ENDPOINT,
-    //       where('c_lat_coor1', '==', 48.8509),
-    //       where('c_long_coor1', '==', -0.541597),
-    //     ),
-    //   )
-    // execute(
-    //   getDocsCustom(
-    //     ENDPOINT,
-    //     where('c_etat_fonct', '==', 'En fonctionnement'),
-    //   ),
-    // )
     execute(query)
   }, [execute, query])
 
@@ -204,16 +183,8 @@ const DaeRender = () => {
   const handleClick = () => {
     getLocation()
       .then((coords) => {
-        // console.log(
-        //   `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`,
-        // )
         getGeoDocs(ENDPOINT, coords)
           .then((data) => {
-            // data.forEach((item) => {
-            //   console.log(item.doc)
-            //   // console.log(item.id)
-            //   console.log(item.distance)
-            // })
             setDae(
               data
                 ? data.map((item) => ({

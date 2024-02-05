@@ -45,11 +45,6 @@ const AppSearchDae = () => {
     where('c_etat_fonct', '==', 'En fonctionnement'),
   )
 
-  //   useEffect(() => {
-  //     /** Tous les DAE **/
-
-  //     execute(getDocsCustom(ENDPOINT))
-  //   }, [execute])
 
   useEffect(() => {
     /** Tous les DAE **/
@@ -73,8 +68,6 @@ const AppSearchDae = () => {
         const {
           c_lat_coor1,
           c_long_coor1,
-          c_nom,
-          // c_etat_valid,
           c_adr_num,
           c_adr_voie,
           c_com_cp,
@@ -83,7 +76,7 @@ const AppSearchDae = () => {
         return [
           {
             geocode: [c_lat_coor1, c_long_coor1],
-            popUp: `Hello, je suis le DAE : ${c_nom}`,
+            popUp: `Hello, DAE situé au ${c_adr_num} ${c_adr_voie} ${c_com_cp} - Disponibilité : ${c_disp_j}`,
           },
         ]
       })
@@ -124,7 +117,9 @@ const AppSearchDae = () => {
                       icon={customsIcon}
                       key={index}
                     >
-                      <Popup>{marker[0].popUp}</Popup>
+                      <Popup className="border-2 rounded-2xl border-teal-500 p-4 bg-gradient-to-r from-green-600 to-pink-500">
+                        {marker[0].popUp}
+                      </Popup>
                     </Marker>
                   ))}
                 </MarkerClusterGroup>
