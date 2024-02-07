@@ -1,4 +1,4 @@
-import AuthFormUser from '@/components/AuthFormUser'
+import AuthFormUser from '../components/AuthFormUser'
 import { useState } from 'react'
 import './bgHeaderPage.css'
 

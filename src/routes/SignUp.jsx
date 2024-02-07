@@ -6,8 +6,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+<<<<<<< HEAD
 import { app } from '@/firebase/initFirebase'
 import { useNavigate } from 'react-router-dom'
+=======
+import { app } from '@/firebase/initFirebase.js'
+
+>>>>>>> 5c0eb5b (up)
 import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'

@@ -1,7 +1,7 @@
 import { collection, getDocs, query } from 'firebase/firestore/lite'
 
 import { DISTANCE } from './constants.js'
-import { db } from '../firebase/initFirebase'
+import { db } from '../firebase/initFirebase.js'
 import { calculateDistance } from '../utils/helpers.js'
 
 const getDocsCustom = async (endpoint, ...whereOptions) => {
