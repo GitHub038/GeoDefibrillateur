@@ -10,7 +10,7 @@ import { Footer } from './components/Footer.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import ErrorPage404 from './pages/ErrorPage404'
 import DaeRender from './components/DaeRender'
-import AppSearchDae from './pages/appSearch'
+import AppSearchDae from './pages/AppSearch'
 
 function App() {
   return (

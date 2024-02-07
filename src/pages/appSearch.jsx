@@ -35,8 +35,6 @@ const customsIcon = new Icon({
 const AppSearchDae = () => {
   const { data, status, error, execute } = useFetchData()
 
-  const [dae, setDae] = useState()
-
   const [positions, setPositions] = useState([])
 
   const initialQuery = getDocsCustom(
@@ -47,17 +45,6 @@ const AppSearchDae = () => {
   useEffect(() => {
     execute(initialQuery)
   }, [execute])
-
-  useEffect(() => {
-    setDae(
-      data && data.docs
-        ? data.docs.map((doc) => ({
-            id: doc.gid,
-            ...doc.data(),
-          }))
-        : [],
-    )
-  }, [data])
 
   useEffect(() => {
     if (data && data.docs) {
