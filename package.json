@@ -34,12 +34,8 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-<<<<<<< HEAD
     "test": "vitest",
     "coverage": "vitest run --coverage"
-=======
-    "test": "jest"
->>>>>>> 5c0eb5b (up)
   },
   "eslintConfig": {
     "extends": [
