@@ -12,7 +12,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
 
-// const SignUp = ({ isLoading }) => {
+
 const SignUp = () => {
   const { toast } = useToast()
   const navigate = useNavigate()
@@ -27,10 +27,6 @@ const SignUp = () => {
     e.preventDefault()
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        // toast({
-        //   title: '🎉 Bravo, compte crée avec succès !',
-        //   description: 'Cliquez sur "Connectez-vous", et identifiez-vous!',
-        // })
         navigate('/profil')
       })
       .catch((error) => {

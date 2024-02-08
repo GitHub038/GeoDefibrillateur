@@ -10,7 +10,6 @@ import { Toaster } from '@/components/ui/toaster'
 import { useToast } from '@/components/ui/use-toast'
 import { Loader2 } from 'lucide-react'
 
-// const SignIn = ({ isLoading }) => {
 const SignIn = () => {
   const { toast } = useToast()
 

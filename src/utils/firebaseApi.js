@@ -1,12 +1,3 @@
-// export const getAllData = async (endpoint) => {
-//   const querySnapshot = await getDocs(collection(db, endpoint))
-//   querySnapshot.forEach((doc) => {
-//     return doc.id, ' => ', doc.data()
-//   })
-
-//   return querySnapshot
-// }
-
 import { collection, getDocs, query } from 'firebase/firestore/lite'
 
 import { DISTANCE } from './constants.js'

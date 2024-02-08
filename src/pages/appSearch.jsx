@@ -19,7 +19,6 @@ const Loader = () => {
   )
 }
 
-//Mini component to display error
 const ErrorMessage = ({ message }) => {
   return (
     <div className="error">
@@ -36,8 +35,6 @@ const customsIcon = new Icon({
 const AppSearchDae = () => {
   const { data, status, error, execute } = useFetchData()
 
-  const [dae, setDae] = useState()
-
   const [positions, setPositions] = useState([])
 
   const initialQuery = getDocsCustom(
@@ -45,27 +42,9 @@ const AppSearchDae = () => {
     where('c_etat_fonct', '==', 'En fonctionnement'),
   )
 
-  //   useEffect(() => {
-  //     /** Tous les DAE **/
-
-  //     execute(getDocsCustom(ENDPOINT))
-  //   }, [execute])
-
   useEffect(() => {
-    /** Tous les DAE **/
     execute(initialQuery)
   }, [execute])
-
-  useEffect(() => {
-    setDae(
-      data && data.docs
-        ? data.docs.map((doc) => ({
-            id: doc.gid,
-            ...doc.data(),
-          }))
-        : [],
-    )
-  }, [data])
 
   useEffect(() => {
     if (data && data.docs) {
@@ -73,8 +52,6 @@ const AppSearchDae = () => {
         const {
           c_lat_coor1,
           c_long_coor1,
-          c_nom,
-          // c_etat_valid,
           c_adr_num,
           c_adr_voie,
           c_com_cp,
@@ -83,7 +60,7 @@ const AppSearchDae = () => {
         return [
           {
             geocode: [c_lat_coor1, c_long_coor1],
-            popUp: `Hello, je suis le DAE : ${c_nom}`,
+            popUp: `Hello, DAE situé au ${c_adr_num} ${c_adr_voie} ${c_com_cp} - Disponibilité : ${c_disp_j}`,
           },
         ]
       })
@@ -100,11 +77,8 @@ const AppSearchDae = () => {
         return <Loader />
       case 'done':
         return (
-          <div className="flex flex-row md:flex-col h-screen mt-20 m-2  overscroll-none h-[calc(100vh_-_4.8rem) relative">
-            <div className="bg-slate-700 h-full rounded-lg items-center ">
-              <p>test</p>
-            </div>
-            <div className=" h-full w-4/6 border-4 absolute">
+          <div className="flex flex-col h-screen z-0 mt-20 m-2  overscroll-none  relative">
+            <div className="block h-full w-full rounded-2xl absolute">
               <MapContainer
                 center={{ lat: 46.7111, lng: 1.7191 }}
                 zoom={6.5}
@@ -124,7 +98,9 @@ const AppSearchDae = () => {
                       icon={customsIcon}
                       key={index}
                     >
-                      <Popup>{marker[0].popUp}</Popup>
+                      <Popup className="border-2 rounded-2xl border-teal-500 p-4 bg-gradient-to-r from-green-600 to-pink-500">
+                        {marker[0].popUp}
+                      </Popup>
                     </Marker>
                   ))}
                 </MarkerClusterGroup>
