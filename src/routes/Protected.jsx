@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 import { Context } from '@/context/AuthContext'
-=======
-import { Context } from '../context/AuthContext'
->>>>>>> Stashed changes
 import { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
 
