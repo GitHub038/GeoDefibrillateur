@@ -146,6 +146,7 @@ Ce que nous avons utilisé :
 - [ ] _Refactors_ :
   - [ ] Réorganiser et restructurer le code afin de favoriser sa lisibilité et sa clarté, mais aussi pour faciliter les tests
 - [ ] _Authentification_ : Ajout de la fonctionnalité "Mot de passe oublié"
+- [ ] _Firebase_ : Intégrer l'ensemble des données disponibles
 
 <p align="right">(<a href="#readme-top">⬆️</a>)</p>
 
@@ -153,9 +154,9 @@ Ce que nous avons utilisé :
 
 ## Contact
 
-Sao dev - [GitHub](https://github.com/GitHub038)
-Bamba Thiam - [GitHub](https://github.com/BambaThiam)
-Pierre-Henri Merrer - [Portfolio](https://ph-merrer.fr/)
+- Sao dev - [GitHub](https://github.com/GitHub038)
+- Bamba Thiam - [GitHub](https://github.com/BambaThiam)
+- Pierre-Henri Merrer - [Portfolio](https://ph-merrer.fr/)
 
 Lien du projet : [https://geodefibrillateurs.netlify.app/](https://geodefibrillateurs.netlify.app/)
 
