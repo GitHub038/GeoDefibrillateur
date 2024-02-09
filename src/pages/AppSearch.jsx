@@ -44,6 +44,7 @@ const AppSearchDae = () => {
 
   useEffect(() => {
     execute(initialQuery)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [execute])
 
   useEffect(() => {
